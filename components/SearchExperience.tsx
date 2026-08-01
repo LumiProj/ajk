@@ -64,10 +64,15 @@ export function SearchExperience({ voters, stats }: Props) {
   }, [isSearching, deferredQuery, results.length]);
 
   return (
-    <div
-      className={`shell ${isSearching ? "shell-searching" : ""}`}
-      dir={isUr ? "rtl" : "ltr"}
-    >
+    <>
+      <div className="election-ribbon" aria-hidden />
+      <div className="atmosphere-orb atmosphere-orb-a" aria-hidden />
+      <div className="atmosphere-orb atmosphere-orb-b" aria-hidden />
+
+      <div
+        className={`shell ${isSearching ? "shell-searching" : ""}`}
+        dir={isUr ? "rtl" : "ltr"}
+      >
       <header className="topbar">
         <LanguageToggle lang={lang} onChange={setLang} />
       </header>
@@ -79,15 +84,30 @@ export function SearchExperience({ voters, stats }: Props) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          <Image
-            src="/flag-ajk.png"
-            alt="Azad Jammu and Kashmir flag"
-            width={68}
-            height={45}
-            className="brand-flag"
-            priority
-          />
-          <p className="brand">AJK Election 2026 Quetta</p>
+          <div className="brand-flag-wrap">
+            <Image
+              src="/flag-ajk.png"
+              alt="Azad Jammu and Kashmir flag"
+              width={120}
+              height={80}
+              className="brand-flag"
+              priority
+            />
+          </div>
+          <div className="brand-copy">
+            <p className="brand-kicker">
+              <span className="brand-kicker-dot" aria-hidden />
+              {isUr ? "حتمی فہرست 2026" : "Final Roll 2026"}
+            </p>
+            <p className="brand">AJK Election 2026 Quetta</p>
+            {!isSearching && (
+              <p className="brand-sub">
+                {isUr
+                  ? "آزاد جموں و کشمیر الیکشن کمیشن"
+                  : "AJK Election Commission"}
+              </p>
+            )}
+          </div>
         </motion.div>
 
         {!isSearching && (
@@ -160,6 +180,7 @@ export function SearchExperience({ voters, stats }: Props) {
             : "Azad Jammu & Kashmir Election Commission — Final Roll 2026"}
         </p>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }
