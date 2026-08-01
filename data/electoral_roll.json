@@ -152,7 +152,7 @@
         }
       },
       "source_file": "Quetta (4520049).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -214,7 +214,7 @@
         "en": ""
       },
       "father_name": {
-        "ur": "محمد شفیق",
+        "ur": "محمد شفیع",
         "en": ""
       },
       "cnic": "54401-6579830-1",
@@ -256,7 +256,7 @@
         }
       },
       "source_file": "Quetta (4520049).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -748,7 +748,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ اتفاقیہ",
+        "ur": "محلہ افغانیہ",
         "en": ""
       },
       "list_page": "1/2",
@@ -776,7 +776,7 @@
         }
       },
       "source_file": "Quetta (4520056).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -800,7 +800,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ اتفاقیہ",
+        "ur": "محلہ افغانیہ",
         "en": ""
       },
       "list_page": "1/2",
@@ -828,13 +828,13 @@
         }
       },
       "source_file": "Quetta (4520056).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 3,
       "gender": "male",
       "name": {
-        "ur": "عبد الرافع",
+        "ur": "عبدالرافع",
         "en": ""
       },
       "father_name": {
@@ -852,7 +852,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ اتفاقیہ",
+        "ur": "محلہ افغانیہ",
         "en": ""
       },
       "list_page": "1/2",
@@ -880,7 +880,7 @@
         }
       },
       "source_file": "Quetta (4520056).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -904,7 +904,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ اتفاقیہ",
+        "ur": "محلہ افغانیہ",
         "en": ""
       },
       "list_page": "1/2",
@@ -932,7 +932,7 @@
         }
       },
       "source_file": "Quetta (4520056).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1140,7 +1140,7 @@
         }
       },
       "source_file": "Quetta (4520083).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1250,7 +1250,7 @@
       "serial_number": 1,
       "gender": "female",
       "name": {
-        "ur": "نجمہ نسیم",
+        "ur": "نجمہ شمیم",
         "en": ""
       },
       "father_name": {
@@ -1264,7 +1264,7 @@
       },
       "age": 57,
       "address": {
-        "ur": "مکان نمبر 1/B-4-187، محلہ سیٹلائٹ ٹاؤن بلاک نمبر 4، کوئٹہ",
+        "ur": "مکان نمبر 1/B-4-187، گلی/محلہ سیٹلائٹ ٹاؤن بلاک نمبر 4، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -1296,7 +1296,7 @@
         }
       },
       "source_file": "Quetta (4520086).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -1348,7 +1348,7 @@
         }
       },
       "source_file": "Quetta (4520086).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1372,7 +1372,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "بدھال",
+        "ur": "بڈحال",
         "en": ""
       },
       "list_page": "1/2",
@@ -1400,7 +1400,7 @@
         }
       },
       "source_file": "Quetta (4520087).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1472,7 +1472,7 @@
       },
       "age": 37,
       "address": {
-        "ur": "مکان نمبر 7-13/19، محلہ قائد آباد، کوئٹہ",
+        "ur": "مکان نمبر 7-13/19، محلہ قائد آباد فاروقی روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -1504,7 +1504,7 @@
         }
       },
       "source_file": "Quetta (4520089).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1660,7 +1660,7 @@
         }
       },
       "source_file": "Quetta (4520119).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -1712,7 +1712,7 @@
         }
       },
       "source_file": "Quetta (4520119).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -1836,7 +1836,7 @@
       },
       "age": 67,
       "address": {
-        "ur": "مقیم میٹرو فاطمہ جناح روڈ، کوئٹہ",
+        "ur": "عظیم سینٹر فاطمہ جناح روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -1868,7 +1868,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -1888,7 +1888,7 @@
       },
       "age": 25,
       "address": {
-        "ur": "فہیم سینٹر فاطمہ جناح روڈ، کوئٹہ",
+        "ur": "عظیم سینٹر فاطمہ جناح روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -1920,7 +1920,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -1972,7 +1972,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -1992,7 +1992,7 @@
       },
       "age": 23,
       "address": {
-        "ur": "مقیم میٹرو فاطمہ جناح روڈ، کوئٹہ",
+        "ur": "عظیم سینٹر فاطمہ جناح روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -2024,7 +2024,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 3,
@@ -2044,7 +2044,7 @@
       },
       "age": 47,
       "address": {
-        "ur": "محلہ مقیم میٹرو فاطمہ جناح روڈ، کوئٹہ",
+        "ur": "محلہ عظیم سینٹر فاطمہ جناح روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -2076,7 +2076,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 3,
@@ -2128,7 +2128,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -2180,7 +2180,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -2232,7 +2232,7 @@
         }
       },
       "source_file": "Quetta (4520133).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -2336,7 +2336,7 @@
         }
       },
       "source_file": "Quetta (4520139).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -2388,7 +2388,7 @@
         }
       },
       "source_file": "Quetta (4520139).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -2544,7 +2544,7 @@
         }
       },
       "source_file": "Quetta (4520154).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -2602,7 +2602,7 @@
       "serial_number": 1,
       "gender": "female",
       "name": {
-        "ur": "عتیقہ ندیم",
+        "ur": "ثناء ندیم",
         "en": ""
       },
       "father_name": {
@@ -2648,7 +2648,7 @@
         }
       },
       "source_file": "Quetta (4520156).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -2908,7 +2908,7 @@
         }
       },
       "source_file": "Quetta (4520159).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -3376,7 +3376,7 @@
         }
       },
       "source_file": "Quetta (4520172).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -3448,7 +3448,7 @@
       },
       "age": 28,
       "address": {
-        "ur": "مکان نمبر 108، کیقباد روڈ، محلہ پٹیل باغ، کوئٹہ کینٹ، تحصیل و ضلع کوئٹہ",
+        "ur": "مکان نمبر 108، کیقباد روڈ، محلہ پٹیل باغ، کوئٹہ کینٹ، تحصیل/ضلع کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -3480,7 +3480,7 @@
         }
       },
       "source_file": "Quetta (4520181).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -3590,7 +3590,7 @@
       "serial_number": 1,
       "gender": "female",
       "name": {
-        "ur": "سعدیہ فاروق",
+        "ur": "ملکہ فاروق",
         "en": ""
       },
       "father_name": {
@@ -3636,7 +3636,7 @@
         }
       },
       "source_file": "Quetta (4520188).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -3688,7 +3688,7 @@
         }
       },
       "source_file": "Quetta (4520189).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -3760,7 +3760,7 @@
       },
       "age": 27,
       "address": {
-        "ur": "محلہ ارشدی کلی کریم آباد، کوئٹہ",
+        "ur": "محلہ لاشاری کلی کریم آباد، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -3792,7 +3792,7 @@
         }
       },
       "source_file": "Quetta (4520190).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -4540,11 +4540,11 @@
       },
       "age": 34,
       "address": {
-        "ur": "مکان نمبر 4-30/14، سٹریٹ نمبر 3، محلہ ریلوے اسٹیٹ نصیر محمد روڈ، کوئٹہ",
+        "ur": "مکان نمبر 4-30/14، سٹریٹ نمبر 3، محلہ برمہ اسٹریٹ نصیر محمد روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "گیلان سیداں پلس باڑ",
+        "ur": "گیلان سیداں پلس ناڑ",
         "en": ""
       },
       "list_page": "1/2",
@@ -4572,7 +4572,7 @@
         }
       },
       "source_file": "Quetta (4520193).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -4596,7 +4596,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ جلال خان",
+        "ur": "محلہ جٹکاں",
         "en": ""
       },
       "list_page": "3/4",
@@ -4624,7 +4624,7 @@
         }
       },
       "source_file": "Quetta (4520198).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -4700,7 +4700,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "منڈی بونی",
+        "ur": "منڈی پونچھ",
         "en": ""
       },
       "list_page": "3/4",
@@ -4728,7 +4728,7 @@
         }
       },
       "source_file": "Quetta (4520198).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -4752,7 +4752,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "حلقہ جدگاں جموں",
+        "ur": "محلہ جدکاں جموں",
         "en": ""
       },
       "list_page": "1/4",
@@ -4780,7 +4780,7 @@
         }
       },
       "source_file": "Quetta (4520201).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -4904,11 +4904,11 @@
       },
       "age": 23,
       "address": {
-        "ur": "مکان نمبر 7-1/11، ٹوپی روڈ، محلہ احاطہ گوگل چند، کوئٹہ",
+        "ur": "مکان نمبر 7-1/11، طوبی روڈ، محلہ احاطہ گوگل چند حاجی آباد، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ جوتوں والی",
+        "ur": "محلہ جوتوں والی ریاسی",
         "en": ""
       },
       "list_page": "1/2",
@@ -4936,7 +4936,7 @@
         }
       },
       "source_file": "Quetta (4520207).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -5788,7 +5788,7 @@
       },
       "age": 60,
       "address": {
-        "ur": "مکان نمبر 7-12/38، علمدار روڈ، حافظ فیاض بیکٹ اسٹریٹ، کوئٹہ",
+        "ur": "مکان نمبر 7-12/38، علمدار روڈ، حافظ فیاض بیگ سٹریٹ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -5820,7 +5820,7 @@
         }
       },
       "source_file": "Quetta (4520237).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -5892,11 +5892,11 @@
       },
       "age": 65,
       "address": {
-        "ur": "مکان نمبر 7، گلی المحافظ، بائی پاس لنک روڈ، کوئٹہ",
+        "ur": "مکان نمبر مکان نمبر 7، گلی/محلہ بازی کالونی کواری روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "نباٹولی",
+        "ur": "نباتولی",
         "en": ""
       },
       "list_page": "1/4",
@@ -5924,7 +5924,7 @@
         }
       },
       "source_file": "Quetta (4520241).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -5948,7 +5948,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "نباٹولی",
+        "ur": "نباتولی",
         "en": ""
       },
       "list_page": "1/4",
@@ -5976,7 +5976,7 @@
         }
       },
       "source_file": "Quetta (4520241).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -6104,7 +6104,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "نباٹولی",
+        "ur": "نباتولی",
         "en": ""
       },
       "list_page": "1/4",
@@ -6132,7 +6132,7 @@
         }
       },
       "source_file": "Quetta (4520241).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -6256,7 +6256,7 @@
       },
       "age": 35,
       "address": {
-        "ur": "مکان نمبر 5-13/792، ملک اختر محمد روڈ، کوئٹہ",
+        "ur": "مکان نمبر 5-13/792، محلہ ملک اختر محمد روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -6288,7 +6288,7 @@
         }
       },
       "source_file": "Quetta (4520250).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -6346,7 +6346,7 @@
       "serial_number": 1,
       "gender": "female",
       "name": {
-        "ur": "رخشانہ نسیم",
+        "ur": "رخسانہ نسیم",
         "en": ""
       },
       "father_name": {
@@ -6392,7 +6392,7 @@
         }
       },
       "source_file": "Quetta (4520254).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -6548,7 +6548,7 @@
         }
       },
       "source_file": "Quetta (4520261).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -6568,7 +6568,7 @@
       },
       "age": 56,
       "address": {
-        "ur": "مکان نمبر 187-B/4، گلی نمبر 1، محلہ سیٹلائٹ ٹاؤن، کوئٹہ",
+        "ur": "مکان نمبر 1/B-4-187، گلی/محلہ سیٹلائٹ ٹاؤن، کوئٹہ",
         "en": ""
       },
       "previous_address": {
@@ -6600,7 +6600,7 @@
         }
       },
       "source_file": "Quetta (4520261).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -6624,7 +6624,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "نیوال",
+        "ur": "نیکوال",
         "en": ""
       },
       "list_page": "3/4",
@@ -6652,7 +6652,7 @@
         }
       },
       "source_file": "Quetta (4520264).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -6780,7 +6780,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "نیوال",
+        "ur": "نیکوال",
         "en": ""
       },
       "list_page": "3/4",
@@ -6808,13 +6808,13 @@
         }
       },
       "source_file": "Quetta (4520264).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 3,
       "gender": "female",
       "name": {
-        "ur": "شہینہ اقبال",
+        "ur": "شمیمہ اقبال",
         "en": ""
       },
       "father_name": {
@@ -6828,11 +6828,11 @@
       },
       "age": 39,
       "address": {
-        "ur": "مکان نمبر 8-40/1833، محلہ رحمت کالونی نمبر 1 سریاب روڈ، کوئٹہ",
+        "ur": "مکان نمبر 8-40/1833، محلہ رحمت کالونی نمبر 1 سرکی روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "نیوال",
+        "ur": "نیکوال",
         "en": ""
       },
       "list_page": "3/4",
@@ -6860,7 +6860,7 @@
         }
       },
       "source_file": "Quetta (4520264).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -7248,7 +7248,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "اریہ سنگھ پورہ",
+        "ur": "رنبیر سنگھ پورہ",
         "en": ""
       },
       "list_page": "1/4",
@@ -7276,7 +7276,7 @@
         }
       },
       "source_file": "Quetta (4520279).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -7588,7 +7588,7 @@
         }
       },
       "source_file": "Quetta (4520280).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -7660,11 +7660,11 @@
       },
       "age": 25,
       "address": {
-        "ur": "مکان نمبر 4، محلہ پولیس لائن، کوئٹہ کینٹ، تحصیل و ضلع کوئٹہ",
+        "ur": "مکان نمبر 4، محلہ پولیس لائن، کوئٹہ کینٹ، تحصیل/ضلع کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "بدھال",
+        "ur": "بڈحال",
         "en": ""
       },
       "list_page": "1/4",
@@ -7692,13 +7692,13 @@
         }
       },
       "source_file": "Quetta (4520282).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
       "gender": "male",
       "name": {
-        "ur": "سید تعلیم الحسن کاظمی",
+        "ur": "سید تعظیم الحسن کاظمی",
         "en": ""
       },
       "father_name": {
@@ -7712,11 +7712,11 @@
       },
       "age": 23,
       "address": {
-        "ur": "فلیٹ نمبر 4، محلہ پولیس لائن، کوئٹہ کینٹ، تحصیل و ضلع کوئٹہ",
+        "ur": "فلیٹ نمبر 4، محلہ پولیس لائن، کوئٹہ کینٹ، تحصیل/ضلع کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "بدھال",
+        "ur": "بڈحال",
         "en": ""
       },
       "list_page": "1/4",
@@ -7744,7 +7744,7 @@
         }
       },
       "source_file": "Quetta (4520282).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -7816,11 +7816,11 @@
       },
       "age": 39,
       "address": {
-        "ur": "مکان نمبر 132/160-c، محلہ جناح ٹاؤن سمگلی روڈ، کوئٹہ",
+        "ur": "مکان نمبر 132/160-c، محلہ جناح ٹاؤن سمنگلی روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ نواب کوئٹہ",
+        "ur": "محلہ تالاب کہنہ کلاں",
         "en": ""
       },
       "list_page": "1/4",
@@ -7848,7 +7848,7 @@
         }
       },
       "source_file": "Quetta (4520285).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -7868,11 +7868,11 @@
       },
       "age": 47,
       "address": {
-        "ur": "مکان نمبر 132/160-c، محلہ جناح ٹاؤن سمگلی روڈ، کوئٹہ",
+        "ur": "مکان نمبر 132/160-c، محلہ جناح ٹاؤن سمنگلی روڈ، کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ نواب کوئٹہ",
+        "ur": "محلہ تالاب کہنہ کلاں",
         "en": ""
       },
       "list_page": "1/4",
@@ -7900,7 +7900,7 @@
         }
       },
       "source_file": "Quetta (4520285).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -8010,7 +8010,7 @@
       "serial_number": 3,
       "gender": "male",
       "name": {
-        "ur": "سید محمد عتیق الرحمن شاہ",
+        "ur": "سید محمد شفیق الرحمن شاہ",
         "en": ""
       },
       "father_name": {
@@ -8056,7 +8056,7 @@
         }
       },
       "source_file": "Quetta (4520285).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -8284,11 +8284,11 @@
       },
       "age": 41,
       "address": {
-        "ur": "مکان نمبر 4، پولیس لائن، کوئٹہ کینٹ، تحصیل و ضلع کوئٹہ",
+        "ur": "مکان نمبر 4، پولیس لائن، کوئٹہ کینٹ، تحصیل/ضلع کوئٹہ",
         "en": ""
       },
       "previous_address": {
-        "ur": "بدحال",
+        "ur": "بڈحال",
         "en": ""
       },
       "list_page": "1/4",
@@ -8316,7 +8316,7 @@
         }
       },
       "source_file": "Quetta (4520292).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -8420,7 +8420,7 @@
         }
       },
       "source_file": "Quetta (4520296).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -8472,7 +8472,7 @@
         }
       },
       "source_file": "Quetta (4520296).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -8524,7 +8524,7 @@
         }
       },
       "source_file": "Quetta (4520231).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 2,
@@ -8576,7 +8576,7 @@
         }
       },
       "source_file": "Quetta (4520231).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -8591,7 +8591,7 @@
       },
       "cnic": "54400-1391927-8",
       "occupation": {
-        "ur": "",
+        "ur": "Nil",
         "en": ""
       },
       "age": 32,
@@ -8628,7 +8628,7 @@
         }
       },
       "source_file": "Quetta (4520305).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -8732,7 +8732,7 @@
         }
       },
       "source_file": "Quetta (4520305).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 3,
@@ -8784,7 +8784,7 @@
         }
       },
       "source_file": "Quetta (4520305).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 4,
@@ -8836,7 +8836,7 @@
         }
       },
       "source_file": "Quetta (4520305).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "vision_verified"
     },
     {
       "serial_number": 1,
@@ -9047,5 +9047,5 @@
       "ocr_quality": "vision"
     }
   ],
-  "updated_at": "2026-08-01T08:21:30.796625+00:00"
+  "updated_at": "2026-08-01T09:17:57.011592+00:00"
 }
