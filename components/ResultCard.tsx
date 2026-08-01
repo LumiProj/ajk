@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { Lang, VoterRecord } from "@/lib/types";
+import type { Lang, LocalizedString, VoterRecord } from "@/lib/types";
 import { ShareButton } from "./ShareButton";
 
 type Props = {
@@ -10,33 +10,31 @@ type Props = {
   index: number;
 };
 
+function pick(value: LocalizedString, lang: Lang) {
+  return lang === "ur" ? value.ur : value.en;
+}
+
 function Row({
-  labelUr,
-  labelEn,
-  valueUr,
-  valueEn,
+  label,
+  value,
   lang,
   ltr,
 }: {
-  labelUr: string;
-  labelEn: string;
-  valueUr: string;
-  valueEn?: string;
+  label: string;
+  value: string;
   lang: Lang;
   ltr?: boolean;
 }) {
-  const showEn = lang === "en";
+  const isUr = lang === "ur";
   return (
     <div className="detail-row">
       <div className="detail-label">
-        <span className="urdu-text">{labelUr}</span>
-        {showEn && <span className="field-en en-text">{labelEn}</span>}
+        <span className={isUr ? "urdu-text" : "en-text"}>{label}</span>
       </div>
-      <div className={`detail-value ${ltr ? "ltr-value" : "urdu-text"}`}>
-        {ltr ? <span dir="ltr">{valueUr}</span> : valueUr}
-        {showEn && valueEn && valueEn !== valueUr && (
-          <span className="value-en en-text">{valueEn}</span>
-        )}
+      <div
+        className={`detail-value ${ltr ? "ltr-value" : isUr ? "urdu-text" : "en-text"}`}
+      >
+        {ltr ? <span dir="ltr">{value}</span> : value}
       </div>
     </div>
   );
@@ -44,8 +42,13 @@ function Row({
 
 export function ResultCard({ voter, lang, index }: Props) {
   const isUr = lang === "ur";
-  const genderUr = voter.gender === "male" ? "مرد" : "خاتون";
-  const genderEn = voter.gender === "male" ? "Male" : "Female";
+  const gender = isUr
+    ? voter.gender === "male"
+      ? "مرد"
+      : "خاتون"
+    : voter.gender === "male"
+      ? "Male"
+      : "Female";
 
   return (
     <motion.article
@@ -64,22 +67,18 @@ export function ResultCard({ voter, lang, index }: Props) {
           <p className="result-serial en-text">
             <span dir="ltr">#{voter.serialNumber}</span>
           </p>
-          <h2 className="result-name urdu-text">{voter.name.ur}</h2>
-          {lang === "en" && (
-            <p className="result-name-en en-text">{voter.name.en}</p>
-          )}
-          <p className="result-father urdu-text">
+          <h2 className={`result-name ${isUr ? "urdu-text" : "en-text"}`}>
+            {pick(voter.name, lang)}
+          </h2>
+          <p className={`result-father ${isUr ? "urdu-text" : "en-text"}`}>
             <span className="result-father-label">
               {isUr ? "ولد" : "s/o"}
             </span>{" "}
-            {voter.fatherName.ur}
-            {lang === "en" && (
-              <span className="value-en en-text">{voter.fatherName.en}</span>
-            )}
+            {pick(voter.fatherName, lang)}
           </p>
         </div>
         <div className="result-badges">
-          <span className="badge">{isUr ? genderUr : genderEn}</span>
+          <span className={`badge ${isUr ? "" : "en-text"}`}>{gender}</span>
           <span className="badge badge-area">
             <span dir="ltr">{voter.areaNumber}</span>
           </span>
@@ -90,10 +89,9 @@ export function ResultCard({ voter, lang, index }: Props) {
         <div className="detail-list detail-list-stack">
           <div className="detail-row cnic-row">
             <div className="detail-label">
-              <span className="urdu-text">شناختی کارڈ نمبر</span>
-              {lang === "en" && (
-                <span className="field-en en-text">CNIC</span>
-              )}
+              <span className={isUr ? "urdu-text" : "en-text"}>
+                {isUr ? "شناختی کارڈ نمبر" : "CNIC"}
+              </span>
             </div>
             <div className="detail-value cnic-number">
               <span dir="ltr">{voter.cnic}</span>
@@ -103,10 +101,9 @@ export function ResultCard({ voter, lang, index }: Props) {
             <div className="inline-meta">
               <div>
                 <div className="detail-label">
-                  <span className="urdu-text">عمر</span>
-                  {lang === "en" && (
-                    <span className="field-en en-text">Age</span>
-                  )}
+                  <span className={isUr ? "urdu-text" : "en-text"}>
+                    {isUr ? "عمر" : "Age"}
+                  </span>
                 </div>
                 <div className="detail-value ltr-value">
                   <span dir="ltr">{voter.age}</span>
@@ -114,13 +111,14 @@ export function ResultCard({ voter, lang, index }: Props) {
               </div>
               <div>
                 <div className="detail-label">
-                  <span className="urdu-text">پیشہ</span>
-                  {lang === "en" && (
-                    <span className="field-en en-text">Occupation</span>
-                  )}
+                  <span className={isUr ? "urdu-text" : "en-text"}>
+                    {isUr ? "پیشہ" : "Occupation"}
+                  </span>
                 </div>
-                <div className="detail-value urdu-text">
-                  {voter.occupation.ur}
+                <div
+                  className={`detail-value ${isUr ? "urdu-text" : "en-text"}`}
+                >
+                  {pick(voter.occupation, lang)}
                 </div>
               </div>
             </div>
@@ -129,58 +127,47 @@ export function ResultCard({ voter, lang, index }: Props) {
       </section>
 
       <section className="detail-section">
-        <h3 className="section-title urdu-text">
+        <h3 className={`section-title ${isUr ? "urdu-text" : "en-text"}`}>
           {isUr ? "انتخابی تفصیل" : "Electoral details"}
         </h3>
         <div className="detail-list">
           <Row
-            labelUr="انتخابی علاقہ"
-            labelEn="Electoral area"
-            valueUr={voter.areaName.ur}
-            valueEn={voter.areaName.en}
+            label={isUr ? "انتخابی علاقہ" : "Electoral area"}
+            value={pick(voter.areaName, lang)}
             lang={lang}
           />
           <Row
-            labelUr="علاقہ نمبر"
-            labelEn="Area number"
-            valueUr={voter.areaNumber}
+            label={isUr ? "علاقہ نمبر" : "Area number"}
+            value={voter.areaNumber}
             lang={lang}
             ltr
           />
           <Row
-            labelUr="تحصیل"
-            labelEn="Tehsil"
-            valueUr={voter.tehsil.ur}
-            valueEn={voter.tehsil.en}
+            label={isUr ? "تحصیل" : "Tehsil"}
+            value={pick(voter.tehsil, lang)}
             lang={lang}
           />
           <Row
-            labelUr="ضلع"
-            labelEn="District"
-            valueUr={voter.district.ur}
-            valueEn={voter.district.en}
+            label={isUr ? "ضلع" : "District"}
+            value={pick(voter.district, lang)}
             lang={lang}
           />
         </div>
       </section>
 
       <section className="detail-section">
-        <h3 className="section-title urdu-text">
+        <h3 className={`section-title ${isUr ? "urdu-text" : "en-text"}`}>
           {isUr ? "پتہ" : "Address"}
         </h3>
         <div className="detail-list detail-list-stack">
           <Row
-            labelUr="موجودہ پتہ"
-            labelEn="Current address"
-            valueUr={voter.address.ur}
-            valueEn={voter.address.en}
+            label={isUr ? "موجودہ پتہ" : "Current address"}
+            value={pick(voter.address, lang)}
             lang={lang}
           />
           <Row
-            labelUr="سابقہ پتہ"
-            labelEn="Previous address"
-            valueUr={voter.previousAddress.ur}
-            valueEn={voter.previousAddress.en}
+            label={isUr ? "سابقہ پتہ" : "Previous address"}
+            value={pick(voter.previousAddress, lang)}
             lang={lang}
           />
         </div>

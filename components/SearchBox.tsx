@@ -21,11 +21,9 @@ export function SearchBox({ value, onChange, lang }: Props) {
       transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
     >
       <label htmlFor="cnic" className="search-label">
-        <span className="urdu-text">
+        <span className={isUr ? "urdu-text" : "en-text"}>
           {isUr ? "شناختی کارڈ نمبر" : "CNIC Number"}
         </span>
-        {!isUr && <span className="label-secondary">شناختی کارڈ نمبر</span>}
-        {isUr && <span className="label-secondary en-text">CNIC</span>}
       </label>
       <div className="search-field">
         <input

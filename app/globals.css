@@ -460,10 +460,14 @@ button:first-child .lang-primary {
   line-height: 1.55;
 }
 
-.result-name-en {
-  margin: 0.1rem 0 0;
-  font-size: 0.95rem;
-  color: var(--muted);
+.result-name.en-text {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.badge.en-text {
+  font-family: var(--font-en);
 }
 
 .result-father {
