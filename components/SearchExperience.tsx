@@ -4,7 +4,12 @@ import { useDeferredValue, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
-import { normalizeCnic, searchByCnic } from "@/lib/search";
+import {
+  isActiveSearch,
+  isCnicQuery,
+  normalizeCnic,
+  searchVoters,
+} from "@/lib/search";
 import { cnicFromSearchParams } from "@/lib/shareVoter";
 import { LanguageToggle } from "./LanguageToggle";
 import { SearchBox } from "./SearchBox";
@@ -19,23 +24,32 @@ export function SearchExperience({ voters, stats }: Props) {
   const [lang, setLang] = useState<Lang>("ur");
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
-  const results = searchByCnic(voters, deferredQuery);
+  const results = searchVoters(voters, deferredQuery);
   const isUr = lang === "ur";
-  const digits = normalizeCnic(deferredQuery);
-  const isSearching = digits.length >= 5;
+  const isSearching = isActiveSearch(deferredQuery);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const fromUrl = cnicFromSearchParams(params.get("cnic"));
-    if (fromUrl) setQuery(fromUrl);
+    const fromCnic = cnicFromSearchParams(params.get("cnic"));
+    const fromName = params.get("q")?.trim() ?? "";
+    if (fromCnic) setQuery(fromCnic);
+    else if (fromName) setQuery(fromName);
   }, []);
 
   useEffect(() => {
-    const next = normalizeCnic(query);
     const url = new URL(window.location.href);
-    if (next.length >= 5) url.searchParams.set("cnic", next);
-    else url.searchParams.delete("cnic");
+    const trimmed = query.trim();
+    if (isCnicQuery(trimmed) && normalizeCnic(trimmed).length >= 5) {
+      url.searchParams.set("cnic", normalizeCnic(trimmed));
+      url.searchParams.delete("q");
+    } else if (trimmed.length >= 2 && !isCnicQuery(trimmed)) {
+      url.searchParams.set("q", trimmed);
+      url.searchParams.delete("cnic");
+    } else {
+      url.searchParams.delete("cnic");
+      url.searchParams.delete("q");
+    }
     window.history.replaceState(null, "", url);
   }, [query]);
 
@@ -90,7 +104,7 @@ export function SearchExperience({ voters, stats }: Props) {
         {!isSearching && (
           <>
             <motion.h1
-              className="headline urdu-text"
+              className={`headline ${isUr ? "urdu-text" : "en-text"}`}
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{
@@ -115,8 +129,8 @@ export function SearchExperience({ voters, stats }: Props) {
               }}
             >
               {isUr
-                ? "جموں و متاثرین منگلا ڈیم — کوئٹہ۔ صرف شناختی کارڈ نمبر سے تلاش کریں۔"
-                : "Jammu & Mangla Dam affectees — Quetta. Search by CNIC only."}
+                ? "جموں و متاثرین منگلا ڈیم — کوئٹہ۔ نام یا شناختی کارڈ نمبر سے تلاش کریں۔"
+                : "Jammu & Mangla Dam affectees — Quetta. Search by name or CNIC."}
             </motion.p>
           </>
         )}
@@ -140,7 +154,7 @@ export function SearchExperience({ voters, stats }: Props) {
       </main>
 
       <footer className="site-footer">
-        <p className="urdu-text">
+        <p className={isUr ? "urdu-text" : "en-text"}>
           {isUr
             ? "آزاد جموں و کشمیر الیکشن کمیشن — حتمی فہرست ۲۰۲۶"
             : "Azad Jammu & Kashmir Election Commission — Final Roll 2026"}
