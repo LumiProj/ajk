@@ -4942,8 +4942,8 @@
       "serial_number": 1,
       "gender": "male",
       "name": {
-        "ur": "محمد وکیل",
-        "en": "Muhammad Wakeel"
+        "ur": "محمد اکمل",
+        "en": "Muhammad Akmal"
       },
       "father_name": {
         "ur": "طارق پرویز",
@@ -4960,7 +4960,7 @@
         "en": ""
       },
       "previous_address": {
-        "ur": "محلہ چیت لائیاں",
+        "ur": "محلہ چیت کالیاں",
         "en": ""
       },
       "list_page": "1/4",
@@ -4988,7 +4988,7 @@
         }
       },
       "source_file": "Quetta (4520218).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 1,
