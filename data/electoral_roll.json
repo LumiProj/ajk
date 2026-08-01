@@ -4318,12 +4318,12 @@
       "serial_number": 6,
       "gender": "male",
       "name": {
-        "ur": "شمیم اقبال",
-        "en": ""
+        "ur": "فہیم اقبال",
+        "en": "Faheem Iqbal"
       },
       "father_name": {
         "ur": "حاجی اقبال حسین",
-        "en": ""
+        "en": "Haji Iqbal Hussain"
       },
       "cnic": "54400-0487849-1",
       "occupation": {
@@ -4333,11 +4333,11 @@
       "age": 56,
       "address": {
         "ur": "نواں کلی، محلہ زرغون آباد فیز 1، کوئٹہ",
-        "en": ""
+        "en": "Nawan Killi, Mohalla Zarghoon Abad Phase 1, Quetta"
       },
       "previous_address": {
-        "ur": "منڈی پونچھی",
-        "en": ""
+        "ur": "منڈی پونچھ",
+        "en": "Mandi Poonch"
       },
       "list_page": "1/4",
       "electoral_area": {
@@ -4364,7 +4364,7 @@
         }
       },
       "source_file": "Quetta (4520192).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 7,
