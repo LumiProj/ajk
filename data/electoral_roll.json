@@ -4942,8 +4942,8 @@
       "serial_number": 1,
       "gender": "male",
       "name": {
-        "ur": "محمد اکمل",
-        "en": "Muhammad Akmal"
+        "ur": "محمد ایمل",
+        "en": "Muhammad Aimal"
       },
       "father_name": {
         "ur": "طارق پرویز",
@@ -4990,6 +4990,7 @@
       "source_file": "Quetta (4520218).pdf",
       "ocr_quality": "manual"
     },
+
     {
       "serial_number": 1,
       "gender": "female",
