@@ -9,13 +9,14 @@ type Props = {
   index: number;
 };
 
-function Field({
+function Row({
   labelUr,
   labelEn,
   valueUr,
   valueEn,
   lang,
   ltr,
+  mono,
 }: {
   labelUr: string;
   labelEn: string;
@@ -23,25 +24,30 @@ function Field({
   valueEn?: string;
   lang: Lang;
   ltr?: boolean;
+  mono?: boolean;
 }) {
   const showEn = lang === "en";
   return (
-    <div className="result-field">
-      <dt>
+    <div className="detail-row">
+      <div className="detail-label">
         <span className="urdu-text">{labelUr}</span>
         {showEn && <span className="field-en en-text">{labelEn}</span>}
-      </dt>
-      <dd dir={ltr ? "ltr" : undefined} className={ltr ? "ltr-value" : "urdu-text"}>
+      </div>
+      <div
+        className={`detail-value ${ltr || mono ? "ltr-value" : "urdu-text"}`}
+        dir={ltr || mono ? "ltr" : undefined}
+      >
         {valueUr}
         {showEn && valueEn && valueEn !== valueUr && (
           <span className="value-en en-text">{valueEn}</span>
         )}
-      </dd>
+      </div>
     </div>
   );
 }
 
 export function ResultCard({ voter, lang, index }: Props) {
+  const isUr = lang === "ur";
   const genderUr = voter.gender === "male" ? "مرد" : "خاتون";
   const genderEn = voter.gender === "male" ? "Male" : "Female";
 
@@ -58,78 +64,112 @@ export function ResultCard({ voter, lang, index }: Props) {
       layout
     >
       <header className="result-card-header">
-        <div>
+        <div className="result-identity">
+          <p className="result-serial en-text" dir="ltr">
+            #{voter.serialNumber}
+          </p>
           <h2 className="result-name urdu-text">{voter.name.ur}</h2>
           {lang === "en" && (
             <p className="result-name-en en-text">{voter.name.en}</p>
           )}
+          <p className="result-father urdu-text">
+            <span className="result-father-label">
+              {isUr ? "ولد" : "s/o"}
+            </span>{" "}
+            {voter.fatherName.ur}
+            {lang === "en" && (
+              <span className="value-en en-text">{voter.fatherName.en}</span>
+            )}
+          </p>
         </div>
         <div className="result-badges">
-          <span className="badge">{genderUr}{lang === "en" ? ` · ${genderEn}` : ""}</span>
+          <span className="badge">{isUr ? genderUr : genderEn}</span>
           <span className="badge badge-area" dir="ltr">
             {voter.areaNumber}
           </span>
         </div>
       </header>
 
-      <dl className="result-grid">
-        <Field
-          labelUr="والد کا نام"
-          labelEn="Father's name"
-          valueUr={voter.fatherName.ur}
-          valueEn={voter.fatherName.en}
-          lang={lang}
-        />
-        <Field
-          labelUr="شناختی کارڈ نمبر"
-          labelEn="CNIC"
-          valueUr={voter.cnic}
-          lang={lang}
-          ltr
-        />
-        <Field
-          labelUr="عمر"
-          labelEn="Age"
-          valueUr={String(voter.age)}
-          lang={lang}
-          ltr
-        />
-        <Field
-          labelUr="پیشہ"
-          labelEn="Occupation"
-          valueUr={voter.occupation.ur}
-          valueEn={voter.occupation.en}
-          lang={lang}
-        />
-        <Field
-          labelUr="انتخابی علاقہ"
-          labelEn="Electoral area"
-          valueUr={`${voter.areaName.ur} (${voter.areaNumber})`}
-          valueEn={`${voter.areaName.en} (${voter.areaNumber})`}
-          lang={lang}
-        />
-        <Field
-          labelUr="تحصیل / ضلع"
-          labelEn="Tehsil / District"
-          valueUr={`${voter.tehsil.ur}، ${voter.district.ur}`}
-          valueEn={`${voter.tehsil.en}, ${voter.district.en}`}
-          lang={lang}
-        />
-        <Field
-          labelUr="پتہ"
-          labelEn="Address"
-          valueUr={voter.address.ur}
-          valueEn={voter.address.en}
-          lang={lang}
-        />
-        <Field
-          labelUr="سابقہ پتہ"
-          labelEn="Previous address"
-          valueUr={voter.previousAddress.ur}
-          valueEn={voter.previousAddress.en}
-          lang={lang}
-        />
-      </dl>
+      <div className="cnic-strip" dir="ltr">
+        <div>
+          <p className="cnic-label">
+            {isUr ? "شناختی کارڈ نمبر" : "CNIC"}
+          </p>
+          <p className="cnic-value">{voter.cnic}</p>
+        </div>
+        <div className="meta-chips">
+          <div className="meta-chip">
+            <span className="meta-chip-label">{isUr ? "عمر" : "Age"}</span>
+            <span className="meta-chip-value" dir="ltr">
+              {voter.age}
+            </span>
+          </div>
+          <div className="meta-chip">
+            <span className="meta-chip-label">{isUr ? "پیشہ" : "Job"}</span>
+            <span className="meta-chip-value urdu-text">
+              {voter.occupation.ur}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <section className="detail-section">
+        <h3 className="section-title urdu-text">
+          {isUr ? "انتخابی تفصیل" : "Electoral details"}
+        </h3>
+        <div className="detail-list">
+          <Row
+            labelUr="انتخابی علاقہ"
+            labelEn="Electoral area"
+            valueUr={voter.areaName.ur}
+            valueEn={voter.areaName.en}
+            lang={lang}
+          />
+          <Row
+            labelUr="علاقہ نمبر"
+            labelEn="Area number"
+            valueUr={voter.areaNumber}
+            lang={lang}
+            ltr
+          />
+          <Row
+            labelUr="تحصیل"
+            labelEn="Tehsil"
+            valueUr={voter.tehsil.ur}
+            valueEn={voter.tehsil.en}
+            lang={lang}
+          />
+          <Row
+            labelUr="ضلع"
+            labelEn="District"
+            valueUr={voter.district.ur}
+            valueEn={voter.district.en}
+            lang={lang}
+          />
+        </div>
+      </section>
+
+      <section className="detail-section">
+        <h3 className="section-title urdu-text">
+          {isUr ? "پتہ" : "Address"}
+        </h3>
+        <div className="detail-list detail-list-stack">
+          <Row
+            labelUr="موجودہ پتہ"
+            labelEn="Current address"
+            valueUr={voter.address.ur}
+            valueEn={voter.address.en}
+            lang={lang}
+          />
+          <Row
+            labelUr="سابقہ پتہ"
+            labelEn="Previous address"
+            valueUr={voter.previousAddress.ur}
+            valueEn={voter.previousAddress.en}
+            lang={lang}
+          />
+        </div>
+      </section>
     </motion.article>
   );
 }
