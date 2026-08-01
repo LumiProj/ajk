@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
 import {
   detectRelation,
+  displayName,
   displayOccupation,
   isArabicScript,
   pick,
@@ -60,7 +61,7 @@ export function ResultCard({ voter, lang, index }: Props) {
 
   const relation = detectRelation(voter.fatherName, voter.gender);
   const person = relationPerson(voter.fatherName, lang);
-  const name = pick(voter.name, lang);
+  const name = displayName(voter.name, lang);
   const occupation = displayOccupation(voter.occupation, lang);
 
   return (

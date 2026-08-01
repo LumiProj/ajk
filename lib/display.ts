@@ -6,6 +6,14 @@ export function pick(value: LocalizedString, lang: Lang) {
   return (preferred || fallback || "").trim();
 }
 
+/** Prefer language-specific text; for English names avoid silent Urdu fallback when en exists. */
+export function displayName(value: LocalizedString, lang: Lang) {
+  if (lang === "ur") return (value.ur || value.en || "").trim();
+  const en = (value.en || "").trim();
+  if (en && !isArabicScript(en)) return en;
+  return (value.ur || "").trim();
+}
+
 const REL_PREFIX =
   /^(زوجہ|ولد|بنت|دختر|والدہ|شوہر|w\/o|s\/o|d\/o)\s+/i;
 
@@ -34,7 +42,7 @@ export function relationLabel(kind: RelationKind, lang: Lang) {
 }
 
 export function relationPerson(fatherName: LocalizedString, lang: Lang) {
-  return pick(fatherName, lang).replace(REL_PREFIX, "").trim();
+  return displayName(fatherName, lang).replace(REL_PREFIX, "").trim();
 }
 
 const OCCUPATION_EN: Record<string, string> = {

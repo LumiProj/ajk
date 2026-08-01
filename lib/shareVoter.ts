@@ -1,6 +1,7 @@
 import type { Lang, VoterRecord } from "./types";
 import {
   detectRelation,
+  displayName,
   displayOccupation,
   pick,
   relationLabel,
@@ -24,7 +25,7 @@ export function buildShareBody(voter: VoterRecord, lang: Lang): string {
   const kind = detectRelation(voter.fatherName, voter.gender);
   const rel = relationLabel(kind, lang);
   const person = relationPerson(voter.fatherName, lang);
-  const name = pick(voter.name, lang);
+  const name = displayName(voter.name, lang);
   const occupation = displayOccupation(voter.occupation, lang);
   const area = pick(voter.areaName, lang);
   const address = pick(voter.address, lang);

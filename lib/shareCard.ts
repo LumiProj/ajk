@@ -1,6 +1,7 @@
 import type { Lang, VoterRecord } from "./types";
 import {
   detectRelation,
+  displayName,
   displayOccupation,
   isArabicScript,
   pick,
@@ -280,7 +281,7 @@ export async function renderShareCardPng(
   y += serialH + (isUr ? 72 : 48);
 
   // Name — direction follows script (English UI often still has Urdu names)
-  const name = pick(voter.name, lang) || pick(voter.name, "ur");
+  const name = displayName(voter.name, lang) || displayName(voter.name, "ur");
   const nameUrdu = isArabicScript(name);
   ctx.fillStyle = ink;
   ctx.textBaseline = "top";
