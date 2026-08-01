@@ -103,7 +103,28 @@ def area_from_filename(name: str) -> str | None:
 
 
 def loc(ur: str = "", en: str = "") -> dict:
-    return {"ur": ur or "", "en": en or ""}
+    return {"ur": clean_ocr_text(ur or ""), "en": en or ""}
+
+
+CJK_RE = re.compile(r"[\u3040-\u30ff\u3400-\u9fff\uac00-\ud7af]")
+ARABIC_RE = re.compile(r"[\u0600-\u06FF]")
+LATIN_RE = re.compile(r"[A-Za-z]")
+
+
+def clean_ocr_text(text: str) -> str:
+    """Drop Vision OCR noise (CJK glyphs, tiny gibberish)."""
+    t = CJK_RE.sub("", text or "").strip(" ,.;:-–—·•%¥$※'\"")
+    if not t:
+        return ""
+    if len(t) <= 3:
+        return ""
+    arabic = len(ARABIC_RE.findall(t))
+    latin = len(LATIN_RE.findall(t))
+    if latin >= 2 and arabic <= 1:
+        return ""
+    if arabic == 0 and len(t) <= 8:
+        return ""
+    return t
 
 
 @dataclass

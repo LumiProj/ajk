@@ -11,7 +11,9 @@ type Props = {
 };
 
 function pick(value: LocalizedString, lang: Lang) {
-  return lang === "ur" ? value.ur : value.en;
+  const preferred = lang === "ur" ? value.ur : value.en;
+  const fallback = lang === "ur" ? value.en : value.ur;
+  return (preferred || fallback || "").trim();
 }
 
 function Row({
@@ -25,6 +27,7 @@ function Row({
   lang: Lang;
   ltr?: boolean;
 }) {
+  if (!value) return null;
   const isUr = lang === "ur";
   return (
     <div className="detail-row">
