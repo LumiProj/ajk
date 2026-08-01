@@ -9,14 +9,14 @@ type Props = {
   results: VoterRecord[];
   query: string;
   lang: Lang;
+  hasSearched: boolean;
 };
 
-export function ResultList({ results, query, lang }: Props) {
+export function ResultList({ results, query, lang, hasSearched }: Props) {
   const isUr = lang === "ur";
   const trimmed = query.trim();
-  const active = isActiveSearch(trimmed);
 
-  if (!trimmed) {
+  if (!hasSearched) {
     return (
       <motion.p
         className="status-msg"
@@ -25,18 +25,18 @@ export function ResultList({ results, query, lang }: Props) {
         key="idle"
       >
         {isUr
-          ? "نتائج کے لیے نام یا شناختی کارڈ نمبر درج کریں"
-          : "Enter a name or CNIC number to see results"}
+          ? "نام یا نمبر لکھ کر تلاش کریں دبائیں"
+          : "Enter a name or CNIC, then press Search"}
       </motion.p>
     );
   }
 
-  if (!active) {
+  if (!isActiveSearch(trimmed)) {
     return (
       <motion.p
-        className="status-msg"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        className="status-msg status-empty"
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
         key="short"
       >
         {isUr

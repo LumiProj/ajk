@@ -440,6 +440,61 @@ button:first-child .lang-primary {
   gap: 0.55rem;
 }
 
+.search-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.65rem;
+}
+
+.search-row .search-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.search-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 0;
+  border-radius: var(--radius);
+  padding: 0 1.15rem;
+  min-width: 7.5rem;
+  background: linear-gradient(135deg, var(--flag-green), #1a4a2c);
+  color: var(--flag-white);
+  font-weight: 650;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0, 54, 15, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  white-space: nowrap;
+}
+
+.search-submit:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0, 54, 15, 0.28);
+}
+
+.search-submit:active {
+  transform: translateY(0);
+}
+
+.search-submit .urdu-text {
+  font-size: 1.05rem;
+  line-height: 1.4;
+}
+
+@media (max-width: 560px) {
+  .search-row {
+    flex-direction: column;
+  }
+
+  .search-submit {
+    min-height: 3.1rem;
+    width: 100%;
+  }
+}
+
 .search-label {
   display: flex;
   flex-direction: column;
