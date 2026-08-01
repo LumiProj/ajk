@@ -195,7 +195,7 @@ export function SearchExperience({ voters }: Props) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            LA-31
+            LA-34
           </motion.p>
 
           <div ref={resultsRef} className="results-anchor" tabIndex={-1}>

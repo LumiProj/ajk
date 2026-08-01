@@ -389,7 +389,7 @@ export async function renderShareCardPng(
   }
   ctx.textBaseline = "alphabetic";
 
-  // Footer — clear any content bleed, then draw LA-31 with room above
+  // Footer — clear any content bleed, then draw LA-34 with room above
   const footerY = cardY + cardH - 64;
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(cardX + 1, contentMaxY - 8, cardW - 2, cardY + cardH - contentMaxY + 8);
@@ -399,7 +399,7 @@ export async function renderShareCardPng(
   ctx.font = fontSpec(700, 22, false);
   ctx.direction = "ltr";
   ctx.textAlign = "center";
-  ctx.fillText("LA-31", midX, footerY + 8);
+  ctx.fillText("LA-34", midX, footerY + 8);
 
   const blob = await new Promise<Blob | null>((resolve) => {
     canvas.toBlob((b) => resolve(b), "image/png", 0.92);
