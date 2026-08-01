@@ -8,8 +8,13 @@ type Props = {
 };
 
 export function LanguageToggle({ lang, onChange }: Props) {
+  const isUr = lang === "ur";
+
   return (
     <div className="lang-switch" role="group" aria-label="Language">
+      <span className={`lang-switch-caption ${isUr ? "urdu-text" : "en-text"}`}>
+        {isUr ? "زبان منتخب کریں:" : "Choose language:"}
+      </span>
       <div className="lang-toggle" data-active={lang}>
         <button
           type="button"
@@ -17,7 +22,7 @@ export function LanguageToggle({ lang, onChange }: Props) {
           onClick={() => onChange("en")}
           aria-pressed={lang === "en"}
         >
-          EN
+          English
         </button>
         <button
           type="button"
