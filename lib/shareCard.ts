@@ -216,7 +216,7 @@ export async function renderShareCardPng(
   );
 
   // Body
-  let y = cardY + headerH + 56;
+  let y = cardY + headerH + 96;
   const contentPad = 56;
   const contentLeft = cardX + contentPad;
   const contentRight = cardX + cardW - contentPad;
