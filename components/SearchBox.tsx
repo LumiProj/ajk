@@ -60,15 +60,17 @@ export function SearchBox({ value, onChange, onSearch, lang }: Props) {
             dir={isCnicQuery(value) || !value ? "ltr" : isUr ? "rtl" : "auto"}
             aria-describedby="search-hint"
           />
-          <button
-            type="button"
-            className="search-clear"
-            onClick={() => onChange("")}
-            hidden={!value}
-            aria-label={isUr ? "صاف کریں" : "Clear"}
-          >
-            ×
-          </button>
+          {value ? (
+            <button
+              type="button"
+              className="search-clear"
+              onClick={() => onChange("")}
+              aria-label={isUr ? "صاف کریں" : "Clear"}
+              title={isUr ? "صاف کریں" : "Clear"}
+            >
+              ×
+            </button>
+          ) : null}
         </div>
 
         <button type="submit" className="search-submit">
