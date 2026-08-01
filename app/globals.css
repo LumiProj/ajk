@@ -123,29 +123,113 @@ body::before {
   justify-content: flex-end;
 }
 
-.lang-toggle {
+.lang-switch {
   display: inline-flex;
-  padding: 4px;
-  border: 1px solid var(--line);
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.lang-switch-caption {
+  font-size: 0.92rem;
+  color: var(--muted);
+  line-height: 1;
+}
+
+[dir="ltr"] .lang-switch-caption {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.lang-toggle {
+  position: relative;
+  display: inline-flex;
+  padding: 5px;
+  border: 1px solid rgba(0, 54, 15, 0.12);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.55);
-  backdrop-filter: blur(8px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(244, 246, 243, 0.85));
+  box-shadow:
+    0 8px 24px rgba(0, 54, 15, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
 }
 
 .lang-toggle button {
+  position: relative;
+  z-index: 1;
   border: 0;
   background: transparent;
   color: var(--muted);
-  font-size: 0.85rem;
-  padding: 0.4rem 0.85rem;
+  padding: 0.45rem 0.95rem;
   border-radius: 999px;
   cursor: pointer;
-  transition: background 0.25s ease, color 0.25s ease;
+  transition: color 0.25s ease;
+  min-width: 5.4rem;
+}
+
+.lang-toggle button:hover:not(.active) {
+  color: var(--flag-green);
 }
 
 .lang-toggle button.active {
-  background: var(--flag-green);
   color: var(--flag-white);
+}
+
+.lang-toggle-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background:
+    linear-gradient(135deg, var(--flag-green) 0%, #1a4a2c 55%, var(--flag-saffron-deep) 160%);
+  box-shadow:
+    0 6px 16px rgba(0, 54, 15, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  z-index: -1;
+}
+
+.lang-toggle-text {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.05rem;
+  line-height: 1.15;
+}
+
+.lang-primary {
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+button:first-child .lang-primary {
+  font-family: var(--font-urdu);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.lang-secondary {
+  font-family: var(--font-en);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  opacity: 0.72;
+  text-transform: uppercase;
+}
+
+.lang-toggle button.active .lang-secondary {
+  opacity: 0.9;
+}
+
+@media (max-width: 480px) {
+  .lang-switch-caption {
+    display: none;
+  }
+
+  .lang-toggle button {
+    min-width: 4.6rem;
+    padding: 0.4rem 0.75rem;
+  }
 }
 
 .brand-row {
