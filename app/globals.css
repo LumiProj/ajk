@@ -62,23 +62,6 @@ body::before {
   z-index: 0;
 }
 
-/* Soft crescent watermark — election atmosphere, almost invisible */
-body::after {
-  content: "";
-  position: fixed;
-  inset-inline-end: -6vw;
-  top: 12vh;
-  width: min(48vw, 340px);
-  aspect-ratio: 1;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.045;
-  background:
-    radial-gradient(circle at 42% 50%, transparent 34%, var(--flag-green) 35% 48%, transparent 49%),
-    radial-gradient(circle at 58% 42%, var(--flag-green) 0 7%, transparent 8%);
-  filter: blur(0.2px);
-}
-
 .election-ribbon {
   position: fixed;
   inset-inline: 0;
@@ -98,30 +81,6 @@ body::after {
     var(--flag-green) 90% 100%
   );
   box-shadow: 0 4px 18px rgba(0, 54, 15, 0.12);
-}
-
-.atmosphere-orb {
-  position: fixed;
-  pointer-events: none;
-  z-index: 0;
-  border-radius: 50%;
-  filter: blur(40px);
-}
-
-.atmosphere-orb-a {
-  width: 280px;
-  height: 280px;
-  top: 8%;
-  inset-inline-start: -80px;
-  background: rgba(234, 148, 0, 0.12);
-}
-
-.atmosphere-orb-b {
-  width: 320px;
-  height: 320px;
-  bottom: 10%;
-  inset-inline-end: -100px;
-  background: rgba(0, 54, 15, 0.1);
 }
 
 .urdu-text {

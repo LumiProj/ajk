@@ -85,8 +85,6 @@ export function SearchExperience({ voters, stats }: Props) {
   return (
     <>
       <div className="election-ribbon" aria-hidden />
-      <div className="atmosphere-orb atmosphere-orb-a" aria-hidden />
-      <div className="atmosphere-orb atmosphere-orb-b" aria-hidden />
 
       <div
         className={`shell ${isSearching ? "shell-searching" : ""}`}
