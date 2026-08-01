@@ -10,7 +10,7 @@ import {
 import { normalizeCnic } from "./search";
 
 const W = 1080;
-const H = 1350;
+const H = 1600;
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -317,7 +317,13 @@ export async function renderShareCardPng(
     { label: isUr ? "پتہ" : "Address", value: address },
   ].filter((r) => r.value);
 
+  const footerSpace = 120;
+  const contentMaxY = cardY + cardH - footerSpace;
+
   for (const row of rows) {
+    if (y > contentMaxY - 80) break;
+
+    const isAddress = row.label.includes("Address") || row.label === "پتہ";
     ctx.textBaseline = "top";
     ctx.fillStyle = muted;
     ctx.font = isUr
@@ -327,43 +333,45 @@ export async function renderShareCardPng(
     ctx.textAlign = isUr ? "right" : "left";
     const labelX = isUr ? contentRight : contentLeft;
     ctx.fillText(row.label, labelX, y);
-    y += isUr ? 48 : 32;
+    y += isUr ? 52 : 34;
 
     ctx.fillStyle = ink;
     const valueUrdu = isArabicScript(row.value);
     ctx.font = valueUrdu
-      ? '600 32px "Noto Nastaliq Urdu", serif'
+      ? isAddress
+        ? '600 28px "Noto Nastaliq Urdu", serif'
+        : '600 32px "Noto Nastaliq Urdu", serif'
       : "600 28px Outfit, sans-serif";
+    // Address often mixes Urdu + Latin (786-A); taller lines avoid glyph collisions
     ctx.direction = valueUrdu || isUr ? "rtl" : "ltr";
     ctx.textAlign = isUr ? "right" : "left";
     const valueX = isUr ? contentRight : contentLeft;
+    const lineH = isAddress ? (valueUrdu ? 58 : 40) : valueUrdu ? 50 : 36;
     y += fillWrapped(
       ctx,
       row.value,
       valueX,
       y,
       contentW,
-      valueUrdu ? 46 : 36,
-      row.label.includes("Address") || row.label === "پتہ" ? 3 : 2,
+      lineH,
+      isAddress ? 4 : 2,
       isUr ? "right" : "left",
     );
-    y += isUr ? 36 : 28;
+    y += isUr ? 40 : 30;
   }
   ctx.textBaseline = "alphabetic";
 
-  // Footer
-  const footerY = cardY + cardH - 70;
+  // Footer — clear any content bleed, then draw LA-31 with room above
+  const footerY = cardY + cardH - 64;
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(cardX + 1, contentMaxY - 8, cardW - 2, cardY + cardH - contentMaxY + 8);
   ctx.fillStyle = "rgba(0,54,15,0.08)";
-  ctx.fillRect(cardX, footerY - 24, cardW, 1);
+  ctx.fillRect(cardX + 48, footerY - 28, cardW - 96, 1);
   ctx.fillStyle = muted;
-  ctx.font = isUr
-    ? '500 22px "Noto Nastaliq Urdu", serif'
-    : "500 18px Outfit, sans-serif";
-  ctx.direction = isUr ? "rtl" : "ltr";
-  ctx.textAlign = "center";
   ctx.font = "700 22px Outfit, sans-serif";
   ctx.direction = "ltr";
-  ctx.fillText("LA-31", midX, footerY + 10);
+  ctx.textAlign = "center";
+  ctx.fillText("LA-31", midX, footerY + 8);
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(
