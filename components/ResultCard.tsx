@@ -78,8 +78,9 @@ export function ResultCard({ voter, lang, index }: Props) {
     >
       <header className="result-card-header">
         <div className="result-identity">
-          <p className="result-serial en-text">
-            <span dir="ltr">#{voter.serialNumber}</span>
+          <p className={`result-serial ${isUr ? "urdu-text" : "en-text"}`}>
+            {isUr ? "سلسلہ نمبر" : "SERIAL NO."}{" "}
+            <span dir="ltr">{voter.serialNumber}</span>
           </p>
           <h2
             className={`result-name ${isArabicScript(name) ? "urdu-text" : "en-text"}`}

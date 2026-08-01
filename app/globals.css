@@ -649,11 +649,24 @@ body::before {
 }
 
 .result-serial {
-  margin: 0 0 0.2rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.06em;
-  color: var(--muted);
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0 0 0.55rem;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--flag-saffron) 45%, transparent);
+  background: color-mix(in srgb, var(--flag-saffron) 12%, transparent);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: color-mix(in srgb, var(--flag-saffron) 75%, var(--ink));
+  font-weight: 650;
+  line-height: 1.3;
+}
+
+.result-serial.urdu-text {
+  letter-spacing: 0;
+  font-size: 0.8rem;
 }
 
 .result-name {
@@ -662,6 +675,7 @@ body::before {
   font-weight: 700;
   color: var(--flag-green);
   line-height: 1.55;
+  clear: both;
 }
 
 .result-name.en-text {
