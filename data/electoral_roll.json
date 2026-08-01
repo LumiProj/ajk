@@ -3278,17 +3278,17 @@
       "serial_number": 1,
       "gender": "female",
       "name": {
-        "ur": "اقراء اختر",
-        "en": "Iqra Akhtar"
+        "ur": "اقراء افتخار",
+        "en": "Iqra Iftikhar"
       },
       "father_name": {
-        "ur": "زوجہ محمد فاروق",
-        "en": "w/o Muhammad Farooq"
+        "ur": "زوجہ عمر فاروق",
+        "en": "w/o Umar Farooq"
       },
       "cnic": "54400-6463276-8",
       "occupation": {
         "ur": "طالبہ",
-        "en": ""
+        "en": "Student"
       },
       "age": 27,
       "address": {
@@ -3324,7 +3324,7 @@
         }
       },
       "source_file": "Quetta (4520172).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 1,
