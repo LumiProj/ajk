@@ -16,10 +16,9 @@ import { ResultList } from "./ResultList";
 
 type Props = {
   voters: VoterRecord[];
-  stats: { totalVoters: number; totalAreas: number };
 };
 
-export function SearchExperience({ voters, stats }: Props) {
+export function SearchExperience({ voters }: Props) {
   const [lang, setLang] = useState<Lang>("ur");
   const [draft, setDraft] = useState("");
   const [submitted, setSubmitted] = useState("");
@@ -196,9 +195,7 @@ export function SearchExperience({ voters, stats }: Props) {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
           >
-            {isUr
-              ? `${stats.totalAreas} انتخابی علاقے · ${stats.totalVoters} ووٹر`
-              : `${stats.totalAreas} electoral areas · ${stats.totalVoters} voters`}
+            LA-31
           </motion.p>
 
           <div ref={resultsRef} className="results-anchor" tabIndex={-1}>
