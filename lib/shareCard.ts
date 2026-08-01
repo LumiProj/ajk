@@ -95,15 +95,49 @@ function fillWrapped(
   return lines.length * lineHeight;
 }
 
+function cssFontFamily(cssVar: string, fallback: string): string {
+  if (typeof document === "undefined") return fallback;
+  const probe = document.createElement("span");
+  probe.style.fontFamily = `var(${cssVar}), ${fallback}`;
+  probe.style.position = "absolute";
+  probe.style.visibility = "hidden";
+  document.body.appendChild(probe);
+  const family = getComputedStyle(probe).fontFamily || fallback;
+  probe.remove();
+  return family;
+}
+
+let cachedFonts: { urdu: string; latin: string } | null = null;
+
+function fontFamilies() {
+  if (!cachedFonts) {
+    cachedFonts = {
+      urdu: cssFontFamily("--font-urdu", '"Noto Nastaliq Urdu", serif'),
+      latin: cssFontFamily("--font-en", "Outfit, sans-serif"),
+    };
+  }
+  return cachedFonts;
+}
+
+function fontSpec(weight: number, size: number, urdu: boolean) {
+  const { urdu: urduFamily, latin } = fontFamilies();
+  return `${weight} ${size}px ${urdu ? urduFamily : latin}`;
+}
+
 async function ensureFonts() {
   if (typeof document === "undefined") return;
+  const { urdu, latin } = fontFamilies();
+  const loads = [
+    document.fonts.load(`600 64px ${urdu}`),
+    document.fonts.load(`500 36px ${urdu}`),
+    document.fonts.load(`700 52px ${latin}`),
+    document.fonts.load(`500 28px ${latin}`),
+    document.fonts.ready,
+  ];
   try {
-    await Promise.all([
-      document.fonts.load('600 64px "Noto Nastaliq Urdu"'),
-      document.fonts.load('500 36px "Noto Nastaliq Urdu"'),
-      document.fonts.load("600 40px Outfit"),
-      document.fonts.load("500 28px Outfit"),
-      document.fonts.ready,
+    await Promise.race([
+      Promise.all(loads),
+      new Promise((resolve) => setTimeout(resolve, 1500)),
     ]);
   } catch {
     // Fall back to system fonts if load fails.
@@ -189,28 +223,25 @@ export async function renderShareCardPng(
   ctx.textAlign = "center";
 
   ctx.direction = isUr ? "rtl" : "ltr";
-  ctx.font = isUr
-    ? '500 28px "Noto Nastaliq Urdu", serif'
-    : "500 24px Outfit, sans-serif";
+  ctx.font = fontSpec(500, isUr ? 28 : 24, isUr);
   ctx.fillText(
     isUr ? "حتمی انتخابی فہرست ۲۰۲۶" : "Final Electoral Roll 2026",
     headerMidX,
     fy + fh + 46,
   );
 
-  ctx.font = "700 38px Outfit, sans-serif";
+  ctx.font = fontSpec(700, 38, false);
   ctx.direction = "ltr";
   ctx.fillText("AJK Election 2026 Quetta", headerMidX, fy + fh + 108);
 
   ctx.direction = isUr ? "rtl" : "ltr";
-  ctx.font = isUr
-    ? '500 24px "Noto Nastaliq Urdu", serif'
-    : "500 20px Outfit, sans-serif";
+  ctx.font = fontSpec(500, isUr ? 24 : 20, isUr);
   ctx.fillStyle = "rgba(255,255,255,0.86)";
+  // Avoid bare "&" oddities in some share pipelines; use "and" for English card
   ctx.fillText(
     isUr
       ? "آزاد جموں و کشمیر الیکشن کمیشن"
-      : "Azad Jammu & Kashmir Election Commission",
+      : "Azad Jammu and Kashmir Election Commission",
     headerMidX,
     fy + fh + 164,
   );
@@ -228,10 +259,11 @@ export async function renderShareCardPng(
   const serialLabel = isUr
     ? `سلسلہ نمبر ${voter.serialNumber}`
     : `SERIAL NO. ${voter.serialNumber}`;
-  ctx.font = isUr
-    ? '600 26px "Noto Nastaliq Urdu", serif'
-    : "700 24px Outfit, sans-serif";
-  const serialW = Math.min(contentW, ctx.measureText(serialLabel).width + 56);
+  ctx.font = fontSpec(isUr ? 600 : 700, isUr ? 26 : 24, isUr);
+  const serialW = Math.min(
+    contentW,
+    Math.max(ctx.measureText(serialLabel).width + 56, 180),
+  );
   const serialX = midX - serialW / 2;
   roundRect(ctx, serialX, y, serialW, serialH, 28);
   ctx.fillStyle = "rgba(234,148,0,0.16)";
@@ -247,14 +279,12 @@ export async function renderShareCardPng(
   // Extra gap: Nastaliq ascenders extend well above the baseline
   y += serialH + (isUr ? 72 : 48);
 
-  // Name (top baseline so layout spacing is predictable)
-  const name = pick(voter.name, lang);
+  // Name — direction follows script (English UI often still has Urdu names)
+  const name = pick(voter.name, lang) || pick(voter.name, "ur");
   const nameUrdu = isArabicScript(name);
   ctx.fillStyle = ink;
   ctx.textBaseline = "top";
-  ctx.font = nameUrdu
-    ? '700 58px "Noto Nastaliq Urdu", serif'
-    : "700 52px Outfit, sans-serif";
+  ctx.font = fontSpec(700, nameUrdu ? 58 : 52, nameUrdu);
   ctx.direction = nameUrdu ? "rtl" : "ltr";
   ctx.textAlign = "center";
   const nameLineH = nameUrdu ? 86 : 60;
@@ -266,12 +296,11 @@ export async function renderShareCardPng(
   const rel = relationLabel(kind, lang);
   const person = relationPerson(voter.fatherName, lang);
   const relLine = `${rel} ${person}`.trim();
+  const relUrdu = isArabicScript(relLine);
   ctx.fillStyle = muted;
   ctx.textBaseline = "top";
-  ctx.font = isArabicScript(relLine)
-    ? '500 32px "Noto Nastaliq Urdu", serif'
-    : "500 26px Outfit, sans-serif";
-  ctx.direction = isArabicScript(relLine) ? "rtl" : "ltr";
+  ctx.font = fontSpec(500, relUrdu ? 32 : 26, relUrdu);
+  ctx.direction = relUrdu ? "rtl" : "ltr";
   y += fillWrapped(ctx, relLine, midX, y, contentW, 44, 2, "center");
   y += 40;
   ctx.textBaseline = "alphabetic";
@@ -291,14 +320,12 @@ export async function renderShareCardPng(
   ctx.fill();
   ctx.fillStyle = greenMid;
   ctx.textBaseline = "alphabetic";
-  ctx.font = isUr
-    ? '500 26px "Noto Nastaliq Urdu", serif'
-    : "600 22px Outfit, sans-serif";
+  ctx.font = fontSpec(isUr ? 500 : 600, isUr ? 26 : 22, isUr);
   ctx.direction = isUr ? "rtl" : "ltr";
   ctx.textAlign = "center";
   ctx.fillText(isUr ? "شناختی کارڈ نمبر" : "CNIC", midX, y + 40);
   ctx.fillStyle = ink;
-  ctx.font = "700 42px Outfit, sans-serif";
+  ctx.font = fontSpec(700, 42, false);
   ctx.direction = "ltr";
   ctx.fillText(voter.cnic, midX, y + 98);
   y += 158;
@@ -323,12 +350,13 @@ export async function renderShareCardPng(
   for (const row of rows) {
     if (y > contentMaxY - 80) break;
 
-    const isAddress = row.label.includes("Address") || row.label === "پتہ";
+    const isAddress = row.label === "Address" || row.label === "پتہ";
+    const valueUrdu = isArabicScript(row.value);
+
     ctx.textBaseline = "top";
     ctx.fillStyle = muted;
-    ctx.font = isUr
-      ? '500 24px "Noto Nastaliq Urdu", serif'
-      : "600 20px Outfit, sans-serif";
+    // Labels follow UI language; values follow their script
+    ctx.font = fontSpec(isUr ? 500 : 600, isUr ? 24 : 20, isUr);
     ctx.direction = isUr ? "rtl" : "ltr";
     ctx.textAlign = isUr ? "right" : "left";
     const labelX = isUr ? contentRight : contentLeft;
@@ -336,16 +364,15 @@ export async function renderShareCardPng(
     y += isUr ? 52 : 34;
 
     ctx.fillStyle = ink;
-    const valueUrdu = isArabicScript(row.value);
-    ctx.font = valueUrdu
-      ? isAddress
-        ? '600 28px "Noto Nastaliq Urdu", serif'
-        : '600 32px "Noto Nastaliq Urdu", serif'
-      : "600 28px Outfit, sans-serif";
-    // Address often mixes Urdu + Latin (786-A); taller lines avoid glyph collisions
-    ctx.direction = valueUrdu || isUr ? "rtl" : "ltr";
-    ctx.textAlign = isUr ? "right" : "left";
-    const valueX = isUr ? contentRight : contentLeft;
+    ctx.font = fontSpec(
+      600,
+      valueUrdu ? (isAddress ? 28 : 32) : 28,
+      valueUrdu,
+    );
+    // Align by value script so English UI + Urdu fallback does not clip off-canvas
+    ctx.direction = valueUrdu ? "rtl" : "ltr";
+    ctx.textAlign = valueUrdu ? "right" : "left";
+    const valueX = valueUrdu ? contentRight : contentLeft;
     const lineH = isAddress ? (valueUrdu ? 58 : 40) : valueUrdu ? 50 : 36;
     y += fillWrapped(
       ctx,
@@ -355,9 +382,9 @@ export async function renderShareCardPng(
       contentW,
       lineH,
       isAddress ? 4 : 2,
-      isUr ? "right" : "left",
+      valueUrdu ? "right" : "left",
     );
-    y += isUr ? 40 : 30;
+    y += isUr || valueUrdu ? 40 : 30;
   }
   ctx.textBaseline = "alphabetic";
 
@@ -368,18 +395,22 @@ export async function renderShareCardPng(
   ctx.fillStyle = "rgba(0,54,15,0.08)";
   ctx.fillRect(cardX + 48, footerY - 28, cardW - 96, 1);
   ctx.fillStyle = muted;
-  ctx.font = "700 22px Outfit, sans-serif";
+  ctx.font = fontSpec(700, 22, false);
   ctx.direction = "ltr";
   ctx.textAlign = "center";
   ctx.fillText("LA-31", midX, footerY + 8);
 
-  return new Promise((resolve, reject) => {
-    canvas.toBlob(
-      (blob) => (blob ? resolve(blob) : reject(new Error("PNG export failed"))),
-      "image/png",
-      0.95,
-    );
+  const blob = await new Promise<Blob | null>((resolve) => {
+    canvas.toBlob((b) => resolve(b), "image/png", 0.92);
   });
+  if (blob && blob.size > 100) return blob;
+
+  // Safari / some WebViews: toBlob can return null — fall back to data URL
+  const dataUrl = canvas.toDataURL("image/png");
+  const res = await fetch(dataUrl);
+  const fallback = await res.blob();
+  if (!fallback.size) throw new Error("PNG export failed");
+  return fallback;
 }
 
 export function shareCardFilename(voter: VoterRecord): string {
@@ -389,15 +420,32 @@ export function shareCardFilename(voter: VoterRecord): string {
 export async function shareOrDownloadCard(
   voter: VoterRecord,
   lang: Lang,
-  title: string,
+  _title: string,
 ): Promise<"shared" | "downloaded"> {
   const blob = await renderShareCardPng(voter, lang);
-  const file = new File([blob], shareCardFilename(voter), { type: "image/png" });
+  const file = new File([blob], shareCardFilename(voter), {
+    type: "image/png",
+  });
 
   const nav = typeof navigator !== "undefined" ? navigator : undefined;
+
+  // Files-only share is most reliable for WhatsApp (mixed-script titles can fail).
   if (nav?.canShare?.({ files: [file] })) {
-    await nav.share({ title, files: [file] });
-    return "shared";
+    try {
+      await nav.share({ files: [file] });
+      return "shared";
+    } catch (error) {
+      if ((error as Error).name === "AbortError") throw error;
+      try {
+        await nav.share({
+          files: [file],
+          title: "AJK Election 2026 Quetta",
+        });
+        return "shared";
+      } catch (error2) {
+        if ((error2 as Error).name === "AbortError") throw error2;
+      }
+    }
   }
 
   // Desktop / unsupported: download the card image

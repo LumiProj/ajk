@@ -5,7 +5,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
 import { buildShareMessage } from "@/lib/shareVoter";
 import { shareOrDownloadCard } from "@/lib/shareCard";
-import { pick } from "@/lib/display";
 
 type Props = {
   voter: VoterRecord;
@@ -19,7 +18,7 @@ export function ShareButton({ voter, lang }: Props) {
   const [status, setStatus] = useState<Status>("idle");
 
   const message = buildShareMessage(voter, lang);
-  const title = `${pick(voter.name, lang)} — AJK Election 2026`;
+  const title = "AJK Election 2026 Quetta";
 
   function flash(next: Status, ms = 2400) {
     setStatus(next);
@@ -36,6 +35,7 @@ export function ShareButton({ voter, lang }: Props) {
         setStatus("idle");
         return;
       }
+      console.error("Share card failed", error);
       flash("error");
     }
   }
