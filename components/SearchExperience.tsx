@@ -85,6 +85,16 @@ export function SearchExperience({ voters, stats }: Props) {
   return (
     <>
       <div className="election-ribbon" aria-hidden />
+      <div className="flag-watermark" aria-hidden>
+        <Image
+          src="/flag-ajk.png"
+          alt=""
+          width={626}
+          height={417}
+          className="flag-watermark-img"
+          priority={false}
+        />
+      </div>
 
       <div
         className={`shell ${isSearching ? "shell-searching" : ""}`}
