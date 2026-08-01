@@ -24,7 +24,8 @@
 .DS_Store
 *.pem
 
-# local extraction artifacts
+# local extraction only (PDFs, OCR previews, scripts) — site uses data/*.json
+/local/
 .venv/
 _preview/
 *.pdf

@@ -1,6 +1,7 @@
 "use client";
 
 import { useDeferredValue, useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
 import { searchByCnic } from "@/lib/search";
@@ -27,14 +28,31 @@ export function SearchExperience({ voters, stats }: Props) {
       </header>
 
       <main className="hero">
-        <motion.p
-          className="brand"
+        <motion.div
+          className="brand-row"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-          AJK Election 2026 Quetta
-        </motion.p>
+          <Image
+            src="/flag-ajk.png"
+            alt="Azad Jammu and Kashmir flag"
+            width={68}
+            height={45}
+            className="brand-flag"
+            priority
+          />
+          <p className="brand">AJK Election 2026 Quetta</p>
+        </motion.div>
+
+        <motion.div
+          className="flag-stripe"
+          aria-hidden
+          initial={{ opacity: 0, scaleX: 0.7 }}
+          animate={{ opacity: 1, scaleX: 1 }}
+          transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+          style={{ transformOrigin: isUr ? "right center" : "left center" }}
+        />
 
         <motion.h1
           className="headline urdu-text"

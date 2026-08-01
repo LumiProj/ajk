@@ -4,7 +4,28 @@ CNIC search for the final electoral roll (Quetta / Jammu & Mangla Dam affectees)
 
 - **Site:** [ajkelection2026quetta.com](https://ajkelection2026quetta.com)
 - **Stack:** Next.js, TypeScript, Tailwind CSS, Framer Motion
-- **Data:** JSON files in [`data/`](data/) — add a new area file and redeploy
+- **Palette:** AJK flag — green `#00360f`, saffron `#ea9400`, white
+
+## Data (website)
+
+Only JSON is used by the site. Put extracted rolls in [`data/`](data/) and redeploy.
+
+```
+data/
+  quetta_4520025.json   ← committed, served by the app
+```
+
+## Local extraction (not deployed)
+
+Source PDFs and OCR previews stay in `local/` (gitignored):
+
+```
+local/
+  pdfs/          ← drop area PDFs here
+  preview/       ← page renders / OCR work
+```
+
+Extract → write JSON into `data/` → commit JSON only.
 
 ## Local development
 
@@ -13,9 +34,7 @@ npm install
 npm run dev
 ```
 
-## Search
-
-Enter a 13-digit CNIC (`54400-0506186-3` or digits only). Results display in Urdu first; use the EN toggle for English labels.
+Search example: `54400-0506186-3`
 
 ## Deploy
 
