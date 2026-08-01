@@ -125,7 +125,6 @@ export async function renderShareCardPng(
   const isUr = lang === "ur";
   const green = "#00360f";
   const greenMid = "#22502e";
-  const saffron = "#ea9400";
   const ink = "#0a1a10";
   const muted = "#5c6b62";
   const cream = "#f7faf6";
@@ -167,10 +166,6 @@ export async function renderShareCardPng(
   ctx.fillStyle = green;
   ctx.fill();
   ctx.fillRect(cardX, cardY + 40, cardW, headerH);
-
-  // Saffron top ribbon
-  ctx.fillStyle = saffron;
-  ctx.fillRect(cardX, cardY, cardW, 14);
 
   // Flag (centered above titles)
   const fw = 78;
@@ -369,10 +364,6 @@ export async function renderShareCardPng(
   ctx.font = "700 22px Outfit, sans-serif";
   ctx.direction = "ltr";
   ctx.fillText("LA-31", midX, footerY + 10);
-
-  // Green side accent
-  ctx.fillStyle = saffron;
-  ctx.fillRect(cardX, cardY + headerH + 20, 8, 160);
 
   return new Promise((resolve, reject) => {
     canvas.toBlob(
