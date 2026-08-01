@@ -232,16 +232,17 @@ export async function renderShareCardPng(
   const contentW = contentRight - contentLeft;
   const midX = headerMidX;
 
-  // Serial pill
+  // Serial pill — keep clear of Nastaliq name flourishes below
+  const serialH = 56;
   const serialLabel = isUr
     ? `سلسلہ نمبر ${voter.serialNumber}`
     : `SERIAL NO. ${voter.serialNumber}`;
   ctx.font = isUr
-    ? '600 28px "Noto Nastaliq Urdu", serif'
+    ? '600 26px "Noto Nastaliq Urdu", serif'
     : "700 24px Outfit, sans-serif";
-  const serialW = Math.min(contentW, ctx.measureText(serialLabel).width + 48);
+  const serialW = Math.min(contentW, ctx.measureText(serialLabel).width + 56);
   const serialX = midX - serialW / 2;
-  roundRect(ctx, serialX, y, serialW, 52, 26);
+  roundRect(ctx, serialX, y, serialW, serialH, 28);
   ctx.fillStyle = "rgba(234,148,0,0.16)";
   ctx.fill();
   ctx.strokeStyle = "rgba(234,148,0,0.45)";
@@ -249,21 +250,25 @@ export async function renderShareCardPng(
   ctx.stroke();
   ctx.fillStyle = "#8a5a00";
   ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
   ctx.direction = isUr ? "rtl" : "ltr";
-  ctx.fillText(serialLabel, midX, y + 35);
-  y += 88;
+  ctx.fillText(serialLabel, midX, y + serialH / 2 + (isUr ? 2 : 0));
+  // Extra gap: Nastaliq ascenders extend well above the baseline
+  y += serialH + (isUr ? 72 : 48);
 
-  // Name
+  // Name (top baseline so layout spacing is predictable)
   const name = pick(voter.name, lang);
   const nameUrdu = isArabicScript(name);
   ctx.fillStyle = ink;
+  ctx.textBaseline = "top";
   ctx.font = nameUrdu
-    ? '700 64px "Noto Nastaliq Urdu", serif'
-    : "700 56px Outfit, sans-serif";
+    ? '700 58px "Noto Nastaliq Urdu", serif'
+    : "700 52px Outfit, sans-serif";
   ctx.direction = nameUrdu ? "rtl" : "ltr";
   ctx.textAlign = "center";
-  y += fillWrapped(ctx, name, midX, y, contentW, nameUrdu ? 78 : 64, 2, "center");
-  y += 18;
+  const nameLineH = nameUrdu ? 86 : 60;
+  y += fillWrapped(ctx, name, midX, y, contentW, nameLineH, 2, "center");
+  y += nameUrdu ? 28 : 20;
 
   // Relation
   const kind = detectRelation(voter.fatherName, voter.gender);
@@ -271,12 +276,14 @@ export async function renderShareCardPng(
   const person = relationPerson(voter.fatherName, lang);
   const relLine = `${rel} ${person}`.trim();
   ctx.fillStyle = muted;
+  ctx.textBaseline = "top";
   ctx.font = isArabicScript(relLine)
-    ? '500 34px "Noto Nastaliq Urdu", serif'
-    : "500 28px Outfit, sans-serif";
+    ? '500 32px "Noto Nastaliq Urdu", serif'
+    : "500 26px Outfit, sans-serif";
   ctx.direction = isArabicScript(relLine) ? "rtl" : "ltr";
-  y += fillWrapped(ctx, relLine, midX, y, contentW, 42, 2, "center");
-  y += 36;
+  y += fillWrapped(ctx, relLine, midX, y, contentW, 44, 2, "center");
+  y += 40;
+  ctx.textBaseline = "alphabetic";
 
   // Divider
   ctx.strokeStyle = "rgba(0,54,15,0.12)";
@@ -360,13 +367,9 @@ export async function renderShareCardPng(
     : "500 18px Outfit, sans-serif";
   ctx.direction = isUr ? "rtl" : "ltr";
   ctx.textAlign = "center";
-  ctx.fillText(
-    isUr
-      ? "جموں و متاثرین منگلا ڈیم — کوئٹہ"
-      : "Jammu & Mangla Dam Affectees — Quetta",
-    midX,
-    footerY + 10,
-  );
+  ctx.font = "700 22px Outfit, sans-serif";
+  ctx.direction = "ltr";
+  ctx.fillText("LA-31", midX, footerY + 10);
 
   // Green side accent
   ctx.fillStyle = saffron;
