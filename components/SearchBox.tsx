@@ -34,7 +34,7 @@ export function SearchBox({ value, onChange, lang }: Props) {
           type="text"
           inputMode="numeric"
           autoComplete="off"
-          placeholder="54400-0506186-3"
+          placeholder="5440005061863"
           value={value}
           onChange={(e) => onChange(formatCnicInput(e.target.value))}
           className="search-input"
@@ -53,8 +53,8 @@ export function SearchBox({ value, onChange, lang }: Props) {
       </div>
       <p id="cnic-hint" className="search-hint">
         {isUr
-          ? "۱۳ ہندسوں کا شناختی کارڈ نمبر درج کریں"
-          : "Enter your 13-digit CNIC (dashes optional)"}
+          ? "۱۳ ہندسے درج کریں — ڈیش (-) ضروری نہیں"
+          : "Enter 13 digits — dashes are optional"}
       </p>
     </motion.div>
   );
