@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
 import {
   isActiveSearch,
-  isCnicQuery,
   normalizeCnic,
   searchVoters,
 } from "@/lib/search";
@@ -37,16 +36,13 @@ export function SearchExperience({ voters, stats }: Props) {
     setHasSearched(true);
 
     const url = new URL(window.location.href);
-    if (isCnicQuery(value) && normalizeCnic(value).length >= 5) {
-      url.searchParams.set("cnic", normalizeCnic(value));
-      url.searchParams.delete("q");
-    } else if (value.length >= 2 && !isCnicQuery(value)) {
-      url.searchParams.set("q", value);
-      url.searchParams.delete("cnic");
+    const digits = normalizeCnic(value);
+    if (digits.length >= 5) {
+      url.searchParams.set("cnic", digits);
     } else {
       url.searchParams.delete("cnic");
-      url.searchParams.delete("q");
     }
+    url.searchParams.delete("q");
     window.history.replaceState(null, "", url);
   }
 
@@ -63,11 +59,9 @@ export function SearchExperience({ voters, stats }: Props) {
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const fromCnic = cnicFromSearchParams(params.get("cnic"));
-    const fromName = params.get("q")?.trim() ?? "";
-    const initial = fromCnic || fromName;
-    if (initial) {
-      setDraft(initial);
-      setSubmitted(initial);
+    if (fromCnic) {
+      setDraft(fromCnic);
+      setSubmitted(fromCnic);
       setHasSearched(true);
     }
   }, []);
@@ -180,8 +174,8 @@ export function SearchExperience({ voters, stats }: Props) {
                 }}
               >
                 {isUr
-                  ? "جموں و متاثرین منگلا ڈیم — کوئٹہ۔ نام یا شناختی کارڈ نمبر سے تلاش کریں۔"
-                  : "Jammu & Mangla Dam affectees — Quetta. Search by name or CNIC."}
+                  ? "جموں و متاثرین منگلا ڈیم — کوئٹہ۔ صرف شناختی کارڈ نمبر سے تلاش کریں۔"
+                  : "Jammu & Mangla Dam affectees — Quetta. Search by CNIC only."}
               </motion.p>
             </>
           )}

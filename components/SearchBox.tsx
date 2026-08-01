@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Lang } from "@/lib/types";
-import { formatCnicInput, isCnicQuery } from "@/lib/search";
+import { formatCnicInput } from "@/lib/search";
 
 type Props = {
   value: string;
@@ -13,16 +13,6 @@ type Props = {
 
 export function SearchBox({ value, onChange, onSearch, lang }: Props) {
   const isUr = lang === "ur";
-  const cnicMode = isCnicQuery(value) || value === "";
-
-  function handleChange(raw: string) {
-    const compact = raw.replace(/[\s-]/g, "");
-    if (compact.length > 0 && /^\d+$/.test(compact)) {
-      onChange(formatCnicInput(raw));
-      return;
-    }
-    onChange(raw);
-  }
 
   return (
     <motion.form
@@ -37,7 +27,7 @@ export function SearchBox({ value, onChange, onSearch, lang }: Props) {
     >
       <label htmlFor="voter-search" className="search-label">
         <span className={isUr ? "urdu-text" : "en-text"}>
-          {isUr ? "نام یا شناختی کارڈ نمبر" : "Name or CNIC number"}
+          {isUr ? "شناختی کارڈ نمبر" : "CNIC number"}
         </span>
       </label>
 
@@ -45,19 +35,16 @@ export function SearchBox({ value, onChange, onSearch, lang }: Props) {
         <div className="search-field">
           <input
             id="voter-search"
-            name="voter-search"
+            name="cnic"
             type="text"
-            inputMode={cnicMode && value.length > 0 ? "numeric" : "text"}
+            inputMode="numeric"
             autoComplete="off"
-            placeholder={
-              isUr
-                ? "مثال: احمد علی یا 12345-1234567-1"
-                : "e.g. Ahmed Ali or 12345-1234567-1"
-            }
+            enterKeyHint="search"
+            placeholder={isUr ? "مثال: 12345-1234567-1" : "e.g. 12345-1234567-1"}
             value={value}
-            onChange={(e) => handleChange(e.target.value)}
+            onChange={(e) => onChange(formatCnicInput(e.target.value))}
             className="search-input"
-            dir={isCnicQuery(value) || !value ? "ltr" : isUr ? "rtl" : "auto"}
+            dir="ltr"
             aria-describedby="search-hint"
           />
           {value ? (
@@ -83,8 +70,8 @@ export function SearchBox({ value, onChange, onSearch, lang }: Props) {
 
       <p id="search-hint" className="search-hint">
         {isUr
-          ? "نام یا نمبر لکھیں، پھر تلاش کریں دبائیں / Enter"
-          : "Type a name or CNIC, then press Search / Enter"}
+          ? "۱۳ ہندسے درج کریں — ڈیش ضروری نہیں، پھر تلاش کریں"
+          : "Enter 13 digits — dashes optional — then press Search"}
       </p>
     </motion.form>
   );

@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
-import { isActiveSearch, isCnicQuery } from "@/lib/search";
+import { isActiveSearch } from "@/lib/search";
 import { ResultCard } from "./ResultCard";
 
 type Props = {
@@ -14,7 +14,6 @@ type Props = {
 
 export function ResultList({ results, query, lang, hasSearched }: Props) {
   const isUr = lang === "ur";
-  const trimmed = query.trim();
 
   if (!hasSearched) {
     return (
@@ -25,13 +24,13 @@ export function ResultList({ results, query, lang, hasSearched }: Props) {
         key="idle"
       >
         {isUr
-          ? "نام یا نمبر لکھ کر تلاش کریں دبائیں"
-          : "Enter a name or CNIC, then press Search"}
+          ? "شناختی کارڈ نمبر لکھ کر تلاش کریں دبائیں"
+          : "Enter a CNIC number, then press Search"}
       </motion.p>
     );
   }
 
-  if (!isActiveSearch(trimmed)) {
+  if (!isActiveSearch(query)) {
     return (
       <motion.p
         className="status-msg status-empty"
@@ -39,13 +38,7 @@ export function ResultList({ results, query, lang, hasSearched }: Props) {
         animate={{ opacity: 1, y: 0 }}
         key="short"
       >
-        {isUr
-          ? isCnicQuery(trimmed)
-            ? "کم از کم ۵ ہندسے درج کریں"
-            : "کم از کم ۲ حروف درج کریں"
-          : isCnicQuery(trimmed)
-            ? "Enter at least 5 digits"
-            : "Enter at least 2 characters"}
+        {isUr ? "کم از کم ۵ ہندسے درج کریں" : "Enter at least 5 digits"}
       </motion.p>
     );
   }
@@ -59,8 +52,8 @@ export function ResultList({ results, query, lang, hasSearched }: Props) {
         key="empty"
       >
         {isUr
-          ? "اس تلاش سے کوئی ووٹر نہیں ملا"
-          : "No voter found for this search"}
+          ? "اس نمبر سے کوئی ووٹر نہیں ملا"
+          : "No voter found for this CNIC"}
       </motion.p>
     );
   }
