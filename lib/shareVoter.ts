@@ -18,7 +18,7 @@ export function getShareUrl(voter: VoterRecord): string {
   return url.toString();
 }
 
-/** Compact WhatsApp-friendly body (no URL — attach separately). */
+/** Compact WhatsApp / copy body (no age, no link). */
 export function buildShareBody(voter: VoterRecord, lang: Lang): string {
   const isUr = lang === "ur";
   const kind = detectRelation(voter.fatherName, voter.gender);
@@ -38,7 +38,7 @@ export function buildShareBody(voter: VoterRecord, lang: Lang): string {
       `*نام:* ${name}`,
       `*${rel}:* ${person}`,
       `*CNIC:* ${voter.cnic}`,
-      `*عمر / پیشہ:* ${voter.age} · ${occupation}`,
+      `*پیشہ:* ${occupation}`,
       `*علاقہ:* ${area} (${voter.areaNumber})`,
       `*پتہ:* ${address}`,
     ].join("\n");
@@ -48,21 +48,19 @@ export function buildShareBody(voter: VoterRecord, lang: Lang): string {
     "*AJK Election 2026 Quetta*",
     "Final Electoral Roll",
     "",
-    `*Serial no.:* ${voter.serialNumber}`,
+    `*SERIAL NO.:* ${voter.serialNumber}`,
     `*Name:* ${name}`,
     `*${rel}:* ${person}`,
     `*CNIC:* ${voter.cnic}`,
-    `*Age / Job:* ${voter.age} · ${occupation}`,
+    `*Occupation:* ${occupation}`,
     `*Area:* ${area} (${voter.areaNumber})`,
     `*Address:* ${address}`,
   ].join("\n");
 }
 
-/** Full message with a single link at the end. */
+/** Same as body — no link appended. */
 export function buildShareMessage(voter: VoterRecord, lang: Lang): string {
-  const isUr = lang === "ur";
-  const linkLabel = isUr ? "لنک" : "Link";
-  return `${buildShareBody(voter, lang)}\n\n${linkLabel}:\n${getShareUrl(voter)}`;
+  return buildShareBody(voter, lang);
 }
 
 /** @deprecated use buildShareMessage */

@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
-import {
-  buildShareBody,
-  buildShareMessage,
-  getShareUrl,
-} from "@/lib/shareVoter";
+import { buildShareBody, buildShareMessage } from "@/lib/shareVoter";
 
 type Props = {
   voter: VoterRecord;
@@ -20,16 +16,15 @@ export function ShareButton({ voter, lang }: Props) {
 
   const body = buildShareBody(voter, lang);
   const message = buildShareMessage(voter, lang);
-  const url = getShareUrl(voter);
   const title = isUr
     ? `${voter.name.ur} — AJK Election 2026`
-    : `${voter.name.en} — AJK Election 2026`;
+    : `${voter.name.en || voter.name.ur} — AJK Election 2026`;
 
   async function shareNative() {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        // Keep URL out of `text` to avoid WhatsApp duplicating the link.
-        await navigator.share({ title, text: body, url });
+        // Text only — no URL/link in the share payload.
+        await navigator.share({ title, text: body });
         setStatus("shared");
         window.setTimeout(() => setStatus("idle"), 2000);
         return;
