@@ -29,6 +29,8 @@
 .venv/
 _preview/
 *.pdf
+/scripts/vision_ocr
+!/scripts/vision_ocr.swift
 
 # debug
 npm-debug.log*
