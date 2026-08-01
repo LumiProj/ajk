@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
+import { ShareButton } from "./ShareButton";
 
 type Props = {
   voter: VoterRecord;
@@ -184,6 +185,8 @@ export function ResultCard({ voter, lang, index }: Props) {
           />
         </div>
       </section>
+
+      <ShareButton voter={voter} lang={lang} />
     </motion.article>
   );
 }

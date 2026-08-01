@@ -663,6 +663,133 @@ button:first-child .lang-primary {
   }
 }
 
+.share-bar {
+  margin-top: 0.35rem;
+  padding: 1.05rem 1.35rem 1.2rem;
+  border-top: 1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(0, 54, 15, 0.03), rgba(234, 148, 0, 0.06));
+}
+
+.share-bar-copy {
+  margin-bottom: 0.85rem;
+}
+
+.share-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--flag-green);
+  line-height: 1.7;
+}
+
+[dir="ltr"] .share-title {
+  font-family: var(--font-en);
+  font-size: 0.95rem;
+}
+
+.share-subtitle {
+  margin: 0.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+[dir="rtl"] .share-subtitle {
+  font-family: var(--font-urdu);
+  font-size: 0.95rem;
+}
+
+.share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.65rem 1rem;
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.share-btn:hover {
+  transform: translateY(-1px);
+}
+
+.share-btn:active {
+  transform: translateY(0);
+}
+
+.share-btn-primary {
+  background: linear-gradient(135deg, var(--flag-green), #1a4a2c);
+  color: var(--flag-white);
+  box-shadow: 0 8px 20px rgba(0, 54, 15, 0.22);
+}
+
+.share-btn-primary span:last-child {
+  font-family: var(--font-urdu);
+  font-size: 0.98rem;
+}
+
+[dir="ltr"] .share-btn-primary span:last-child {
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+}
+
+.share-btn-wa {
+  background: #1faa55;
+  color: white;
+  box-shadow: 0 8px 18px rgba(31, 170, 85, 0.22);
+}
+
+.share-btn-ghost {
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--flag-green);
+  border: 1px solid rgba(0, 54, 15, 0.14);
+}
+
+.share-btn-ghost span:last-child {
+  font-family: var(--font-urdu);
+}
+
+[dir="ltr"] .share-btn-ghost span:last-child {
+  font-family: var(--font-en);
+}
+
+.share-toast {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+  color: var(--flag-green);
+  font-weight: 600;
+}
+
+[dir="rtl"] .share-toast {
+  font-family: var(--font-urdu);
+}
+
+@media (max-width: 480px) {
+  .share-bar {
+    padding-inline: 1rem;
+  }
+
+  .share-btn {
+    flex: 1 1 auto;
+    min-width: calc(50% - 0.35rem);
+  }
+
+  .share-btn-primary {
+    flex-basis: 100%;
+  }
+}
+
 .site-footer {
   margin-top: 3rem;
   padding-top: 1.25rem;

@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
 import { normalizeCnic, searchByCnic } from "@/lib/search";
+import { cnicFromSearchParams } from "@/lib/shareVoter";
 import { LanguageToggle } from "./LanguageToggle";
 import { SearchBox } from "./SearchBox";
 import { ResultList } from "./ResultList";
@@ -23,6 +24,20 @@ export function SearchExperience({ voters, stats }: Props) {
   const digits = normalizeCnic(deferredQuery);
   const isSearching = digits.length >= 5;
   const resultsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const fromUrl = cnicFromSearchParams(params.get("cnic"));
+    if (fromUrl) setQuery(fromUrl);
+  }, []);
+
+  useEffect(() => {
+    const next = normalizeCnic(query);
+    const url = new URL(window.location.href);
+    if (next.length >= 5) url.searchParams.set("cnic", next);
+    else url.searchParams.delete("cnic");
+    window.history.replaceState(null, "", url);
+  }, [query]);
 
   useEffect(() => {
     if (!isSearching) return;
