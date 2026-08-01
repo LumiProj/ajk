@@ -1,0 +1,61 @@
+"use client";
+
+import { motion } from "framer-motion";
+import type { Lang } from "@/lib/types";
+import { formatCnicInput } from "@/lib/search";
+
+type Props = {
+  value: string;
+  onChange: (value: string) => void;
+  lang: Lang;
+};
+
+export function SearchBox({ value, onChange, lang }: Props) {
+  const isUr = lang === "ur";
+
+  return (
+    <motion.div
+      className="search-box"
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <label htmlFor="cnic" className="search-label">
+        <span className="urdu-text">
+          {isUr ? "شناختی کارڈ نمبر" : "CNIC Number"}
+        </span>
+        {!isUr && <span className="label-secondary">شناختی کارڈ نمبر</span>}
+        {isUr && <span className="label-secondary en-text">CNIC</span>}
+      </label>
+      <div className="search-field">
+        <input
+          id="cnic"
+          name="cnic"
+          type="text"
+          inputMode="numeric"
+          autoComplete="off"
+          placeholder="54400-0506186-3"
+          value={value}
+          onChange={(e) => onChange(formatCnicInput(e.target.value))}
+          className="search-input"
+          dir="ltr"
+          aria-describedby="cnic-hint"
+        />
+        <button
+          type="button"
+          className="search-clear"
+          onClick={() => onChange("")}
+          hidden={!value}
+          aria-label={isUr ? "صاف کریں" : "Clear"}
+        >
+          ×
+        </button>
+      </div>
+      <p id="cnic-hint" className="search-hint">
+        {isUr
+          ? "۱۳ ہندسوں کا شناختی کارڈ نمبر درج کریں"
+          : "Enter your 13-digit CNIC (dashes optional)"}
+      </p>
+    </motion.div>
+  );
+}

@@ -1,0 +1,86 @@
+"use client";
+
+import { useDeferredValue, useState } from "react";
+import { motion } from "framer-motion";
+import type { Lang, VoterRecord } from "@/lib/types";
+import { searchByCnic } from "@/lib/search";
+import { LanguageToggle } from "./LanguageToggle";
+import { SearchBox } from "./SearchBox";
+import { ResultList } from "./ResultList";
+
+type Props = {
+  voters: VoterRecord[];
+  stats: { totalVoters: number; totalAreas: number };
+};
+
+export function SearchExperience({ voters, stats }: Props) {
+  const [lang, setLang] = useState<Lang>("ur");
+  const [query, setQuery] = useState("");
+  const deferredQuery = useDeferredValue(query);
+  const results = searchByCnic(voters, deferredQuery);
+  const isUr = lang === "ur";
+
+  return (
+    <div className="shell" dir={isUr ? "rtl" : "ltr"}>
+      <header className="topbar">
+        <LanguageToggle lang={lang} onChange={setLang} />
+      </header>
+
+      <main className="hero">
+        <motion.p
+          className="brand"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        >
+          AJK Election 2026 Quetta
+        </motion.p>
+
+        <motion.h1
+          className="headline urdu-text"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {isUr
+            ? "حتمی انتخابی فہرست تلاش کریں"
+            : "Search the final electoral roll"}
+        </motion.h1>
+
+        <motion.p
+          className="lede"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {isUr
+            ? "جموں و متاثرین منگلا ڈیم — کوئٹہ۔ صرف شناختی کارڈ نمبر سے تلاش کریں۔"
+            : "Jammu & Mangla Dam affectees — Quetta. Search by CNIC only."}
+        </motion.p>
+
+        <SearchBox value={query} onChange={setQuery} lang={lang} />
+
+        <motion.p
+          className="meta-line"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          {isUr
+            ? `${stats.totalAreas} انتخابی علاقے · ${stats.totalVoters} ووٹر`
+            : `${stats.totalAreas} electoral areas · ${stats.totalVoters} voters`}
+        </motion.p>
+
+        <ResultList results={results} query={deferredQuery} lang={lang} />
+      </main>
+
+      <footer className="site-footer">
+        <p className="urdu-text">
+          {isUr
+            ? "آزاد جموں و کشمیر الیکشن کمیشن — حتمی فہرست ۲۰۲۶"
+            : "Azad Jammu & Kashmir Election Commission — Final Roll 2026"}
+        </p>
+      </footer>
+    </div>
+  );
+}

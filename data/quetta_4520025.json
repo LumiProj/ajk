@@ -1,0 +1,81 @@
+{
+  "source_file": "Quetta (4520025).pdf",
+  "document_type": "final_electoral_roll",
+  "year": 2026,
+  "context": {
+    "ur": "جموں و متاثرین منگلا ڈیم",
+    "en": "Jammu and Mangla Dam Affectees"
+  },
+  "authority": {
+    "ur": "آزاد جموں و کشمیر الیکشن کمیشن",
+    "en": "Azad Jammu and Kashmir Election Commission"
+  },
+  "constituency": {
+    "code": "LA-34",
+    "name": {
+      "ur": "ایل اے-34، جموں-1",
+      "en": "LA-34, Jammu-1"
+    }
+  },
+  "electoral_area": {
+    "number": "4520025",
+    "name": {
+      "ur": "نواکلی",
+      "en": "Nawakilli"
+    },
+    "mauza": {
+      "ur": "نواکلی",
+      "en": "Nawakilli"
+    },
+    "patwar_circle": {
+      "ur": "میونسپل کارپوریشن",
+      "en": "Municipal Corporation"
+    },
+    "tehsil": {
+      "ur": "کوئٹہ سٹی",
+      "en": "Quetta City"
+    },
+    "district": {
+      "ur": "کوئٹہ",
+      "en": "Quetta"
+    }
+  },
+  "publication_date": {
+    "ur": "21 مئی 2026",
+    "iso": "2026-05-21"
+  },
+  "voter_summary": {
+    "male": 1,
+    "female": 0,
+    "total": 1
+  },
+  "voters": [
+    {
+      "serial_number": 1,
+      "gender": "male",
+      "name": {
+        "ur": "ولید یوسف",
+        "en": "Waleed Yousaf"
+      },
+      "father_name": {
+        "ur": "محمد یوسف",
+        "en": "Muhammad Yousaf"
+      },
+      "cnic": "54400-0506186-3",
+      "occupation": {
+        "ur": "تجارت",
+        "en": "Business/Trade"
+      },
+      "age": 59,
+      "address": {
+        "ur": "لاشاری کلی کریم، سریاب روڈ، کوئٹہ",
+        "en": "Lashari Killi Karim, Sariab Road, Quetta"
+      },
+      "previous_address": {
+        "ur": "محلہ تالاب کہنہ کلاں",
+        "en": "Mohalla Talab Kuhna Kalan"
+      },
+      "list_page": "1/2"
+    }
+  ]
+}
