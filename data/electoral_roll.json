@@ -4214,41 +4214,41 @@
       "serial_number": 4,
       "gender": "male",
       "name": {
-        "ur": "آمف اقال",
-        "en": ""
+        "ur": "آصف اقبال",
+        "en": "Asif Iqbal"
       },
       "father_name": {
-        "ur": "ماجى تظام الدين ماجى اقبال حسين",
-        "en": ""
+        "ur": "حاجی اقبال حسین",
+        "en": "Haji Iqbal Hussain"
       },
       "cnic": "54400-0416084-9",
       "occupation": {
-        "ur": "كاروباء",
-        "en": ""
+        "ur": "کاروبار",
+        "en": "Business"
       },
       "age": 43,
       "address": {
-        "ur": "مكان تمير A-786. محلّهتدقمون آباد فير 1 وال كل.كواد",
-        "en": ""
+        "ur": "مکان نمبر 786-A، محلہ زرغون آباد فیز 1، کوئٹہ",
+        "en": "House No. 786-A, Mohalla Zarghoon Abad Phase 1, Quetta"
       },
       "previous_address": {
-        "ur": "",
-        "en": ""
+        "ur": "منڈی پٹنی",
+        "en": "Mandi Patni"
       },
-      "list_page": "1/4",
+      "list_page": "2/3",
       "electoral_area": {
         "number": "4520192",
         "name": {
-          "ur": "",
-          "en": ""
+          "ur": "زرغون آباد",
+          "en": "Zarghoon Abad"
         },
         "mauza": {
-          "ur": "",
-          "en": ""
+          "ur": "زرغون آباد",
+          "en": "Zarghoon Abad"
         },
         "patwar_circle": {
-          "ur": "میونسپل کارپوریشن",
-          "en": "Municipal Corporation"
+          "ur": "کینٹونمنٹ",
+          "en": "Cantonment"
         },
         "tehsil": {
           "ur": "کوئٹہ سٹی",
@@ -4260,7 +4260,7 @@
         }
       },
       "source_file": "Quetta (4520192).pdf",
-      "ocr_quality": "auto"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 5,
