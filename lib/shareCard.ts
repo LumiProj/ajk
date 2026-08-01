@@ -160,7 +160,7 @@ export async function renderShareCardPng(
   ctx.restore();
 
   // Header band — centered flag + titles
-  const headerH = 268;
+  const headerH = 290;
   const headerMidX = cardX + cardW / 2;
   roundRect(ctx, cardX, cardY, cardW, headerH + 40, 36);
   ctx.fillStyle = green;
@@ -195,12 +195,12 @@ export async function renderShareCardPng(
   ctx.fillText(
     isUr ? "حتمی انتخابی فہرست ۲۰۲۶" : "Final Electoral Roll 2026",
     headerMidX,
-    fy + fh + 42,
+    fy + fh + 46,
   );
 
   ctx.font = "700 38px Outfit, sans-serif";
   ctx.direction = "ltr";
-  ctx.fillText("AJK Election 2026 Quetta", headerMidX, fy + fh + 92);
+  ctx.fillText("AJK Election 2026 Quetta", headerMidX, fy + fh + 108);
 
   ctx.direction = isUr ? "rtl" : "ltr";
   ctx.font = isUr
@@ -212,7 +212,7 @@ export async function renderShareCardPng(
       ? "آزاد جموں و کشمیر الیکشن کمیشن"
       : "Azad Jammu & Kashmir Election Commission",
     headerMidX,
-    fy + fh + 136,
+    fy + fh + 164,
   );
 
   // Body
