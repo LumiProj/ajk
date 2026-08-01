@@ -16,7 +16,6 @@ function Row({
   valueEn,
   lang,
   ltr,
-  mono,
 }: {
   labelUr: string;
   labelEn: string;
@@ -24,7 +23,6 @@ function Row({
   valueEn?: string;
   lang: Lang;
   ltr?: boolean;
-  mono?: boolean;
 }) {
   const showEn = lang === "en";
   return (
@@ -33,11 +31,8 @@ function Row({
         <span className="urdu-text">{labelUr}</span>
         {showEn && <span className="field-en en-text">{labelEn}</span>}
       </div>
-      <div
-        className={`detail-value ${ltr || mono ? "ltr-value" : "urdu-text"}`}
-        dir={ltr || mono ? "ltr" : undefined}
-      >
-        {valueUr}
+      <div className={`detail-value ${ltr ? "ltr-value" : "urdu-text"}`}>
+        {ltr ? <span dir="ltr">{valueUr}</span> : valueUr}
         {showEn && valueEn && valueEn !== valueUr && (
           <span className="value-en en-text">{valueEn}</span>
         )}
@@ -65,8 +60,8 @@ export function ResultCard({ voter, lang, index }: Props) {
     >
       <header className="result-card-header">
         <div className="result-identity">
-          <p className="result-serial en-text" dir="ltr">
-            #{voter.serialNumber}
+          <p className="result-serial en-text">
+            <span dir="ltr">#{voter.serialNumber}</span>
           </p>
           <h2 className="result-name urdu-text">{voter.name.ur}</h2>
           {lang === "en" && (
@@ -84,34 +79,53 @@ export function ResultCard({ voter, lang, index }: Props) {
         </div>
         <div className="result-badges">
           <span className="badge">{isUr ? genderUr : genderEn}</span>
-          <span className="badge badge-area" dir="ltr">
-            {voter.areaNumber}
+          <span className="badge badge-area">
+            <span dir="ltr">{voter.areaNumber}</span>
           </span>
         </div>
       </header>
 
-      <div className="cnic-strip" dir="ltr">
-        <div>
-          <p className="cnic-label">
-            {isUr ? "شناختی کارڈ نمبر" : "CNIC"}
-          </p>
-          <p className="cnic-value">{voter.cnic}</p>
-        </div>
-        <div className="meta-chips">
-          <div className="meta-chip">
-            <span className="meta-chip-label">{isUr ? "عمر" : "Age"}</span>
-            <span className="meta-chip-value" dir="ltr">
-              {voter.age}
-            </span>
+      <section className="detail-section detail-section-top">
+        <div className="detail-list detail-list-stack">
+          <div className="detail-row cnic-row">
+            <div className="detail-label">
+              <span className="urdu-text">شناختی کارڈ نمبر</span>
+              {lang === "en" && (
+                <span className="field-en en-text">CNIC</span>
+              )}
+            </div>
+            <div className="detail-value cnic-number">
+              <span dir="ltr">{voter.cnic}</span>
+            </div>
           </div>
-          <div className="meta-chip">
-            <span className="meta-chip-label">{isUr ? "پیشہ" : "Job"}</span>
-            <span className="meta-chip-value urdu-text">
-              {voter.occupation.ur}
-            </span>
+          <div className="detail-row meta-row">
+            <div className="inline-meta">
+              <div>
+                <div className="detail-label">
+                  <span className="urdu-text">عمر</span>
+                  {lang === "en" && (
+                    <span className="field-en en-text">Age</span>
+                  )}
+                </div>
+                <div className="detail-value ltr-value">
+                  <span dir="ltr">{voter.age}</span>
+                </div>
+              </div>
+              <div>
+                <div className="detail-label">
+                  <span className="urdu-text">پیشہ</span>
+                  {lang === "en" && (
+                    <span className="field-en en-text">Occupation</span>
+                  )}
+                </div>
+                <div className="detail-value urdu-text">
+                  {voter.occupation.ur}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
       <section className="detail-section">
         <h3 className="section-title urdu-text">
