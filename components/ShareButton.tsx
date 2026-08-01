@@ -3,7 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
-import { buildShareText, getShareUrl } from "@/lib/shareVoter";
+import {
+  buildShareBody,
+  buildShareMessage,
+  getShareUrl,
+} from "@/lib/shareVoter";
 
 type Props = {
   voter: VoterRecord;
@@ -14,16 +18,18 @@ export function ShareButton({ voter, lang }: Props) {
   const isUr = lang === "ur";
   const [status, setStatus] = useState<"idle" | "copied" | "shared">("idle");
 
-  const text = buildShareText(voter, lang);
+  const body = buildShareBody(voter, lang);
+  const message = buildShareMessage(voter, lang);
   const url = getShareUrl(voter);
   const title = isUr
-    ? `${voter.name.ur} — انتخابی ریکارڈ`
-    : `${voter.name.en} — Electoral record`;
+    ? `${voter.name.ur} — AJK Election 2026`
+    : `${voter.name.en} — AJK Election 2026`;
 
   async function shareNative() {
     if (typeof navigator !== "undefined" && navigator.share) {
       try {
-        await navigator.share({ title, text, url });
+        // Keep URL out of `text` to avoid WhatsApp duplicating the link.
+        await navigator.share({ title, text: body, url });
         setStatus("shared");
         window.setTimeout(() => setStatus("idle"), 2000);
         return;
@@ -36,16 +42,16 @@ export function ShareButton({ voter, lang }: Props) {
 
   async function copyText() {
     try {
-      await navigator.clipboard.writeText(text);
+      await navigator.clipboard.writeText(message);
       setStatus("copied");
       window.setTimeout(() => setStatus("idle"), 2200);
     } catch {
-      window.prompt(isUr ? "کاپی کریں:" : "Copy:", text);
+      window.prompt(isUr ? "کاپی کریں:" : "Copy:", message);
     }
   }
 
   function shareWhatsApp() {
-    const wa = `https://wa.me/?text=${encodeURIComponent(text)}`;
+    const wa = `https://wa.me/?text=${encodeURIComponent(message)}`;
     window.open(wa, "_blank", "noopener,noreferrer");
   }
 
@@ -57,13 +63,17 @@ export function ShareButton({ voter, lang }: Props) {
         </p>
         <p className="share-subtitle">
           {isUr
-            ? "واٹس ایپ، ایس ایم ایس یا دیگر ایپس میں بھیجیں"
-            : "Send via WhatsApp, SMS, or other apps"}
+            ? "مختصر اور صاف پیغام — واٹس ایپ کے لیے بہتر"
+            : "Short clean message — better for WhatsApp"}
         </p>
       </div>
 
       <div className="share-actions">
-        <button type="button" className="share-btn share-btn-primary" onClick={shareNative}>
+        <button
+          type="button"
+          className="share-btn share-btn-primary"
+          onClick={shareNative}
+        >
           <ShareIcon />
           <span>{isUr ? "شیئر کریں" : "Share"}</span>
         </button>
@@ -76,7 +86,11 @@ export function ShareButton({ voter, lang }: Props) {
           <WhatsAppIcon />
           <span>WhatsApp</span>
         </button>
-        <button type="button" className="share-btn share-btn-ghost" onClick={copyText}>
+        <button
+          type="button"
+          className="share-btn share-btn-ghost"
+          onClick={copyText}
+        >
           <CopyIcon />
           <span>{isUr ? "کاپی" : "Copy"}</span>
         </button>

@@ -11,57 +11,47 @@ export function getShareUrl(voter: VoterRecord): string {
   return url.toString();
 }
 
-export function buildShareText(voter: VoterRecord, lang: Lang): string {
+/** Compact WhatsApp-friendly body (no URL — attach separately). */
+export function buildShareBody(voter: VoterRecord, lang: Lang): string {
   const isUr = lang === "ur";
-  const gender = isUr
-    ? voter.gender === "male"
-      ? "مرد"
-      : "خاتون"
-    : voter.gender === "male"
-      ? "Male"
-      : "Female";
 
-  const lines = isUr
-    ? [
-        "AJK Election 2026 Quetta",
-        "حتمی انتخابی فہرست ۲۰۲۶",
-        "────────────────────",
-        `نام: ${voter.name.ur}`,
-        `ولد: ${voter.fatherName.ur}`,
-        `جنس: ${gender}`,
-        `شناختی کارڈ: ${voter.cnic}`,
-        `عمر: ${voter.age}`,
-        `پیشہ: ${voter.occupation.ur}`,
-        `انتخابی علاقہ: ${voter.areaName.ur}`,
-        `علاقہ نمبر: ${voter.areaNumber}`,
-        `تحصیل: ${voter.tehsil.ur}`,
-        `ضلع: ${voter.district.ur}`,
-        `موجودہ پتہ: ${voter.address.ur}`,
-        `سابقہ پتہ: ${voter.previousAddress.ur}`,
-        "────────────────────",
-        `تلاش لنک: ${getShareUrl(voter)}`,
-      ]
-    : [
-        "AJK Election 2026 Quetta",
-        "Final Electoral Roll 2026",
-        "────────────────────",
-        `Name: ${voter.name.en}`,
-        `Father: ${voter.fatherName.en}`,
-        `Gender: ${gender}`,
-        `CNIC: ${voter.cnic}`,
-        `Age: ${voter.age}`,
-        `Occupation: ${voter.occupation.en}`,
-        `Electoral area: ${voter.areaName.en}`,
-        `Area number: ${voter.areaNumber}`,
-        `Tehsil: ${voter.tehsil.en}`,
-        `District: ${voter.district.en}`,
-        `Address: ${voter.address.en}`,
-        `Previous address: ${voter.previousAddress.en}`,
-        "────────────────────",
-        `Search link: ${getShareUrl(voter)}`,
-      ];
+  if (isUr) {
+    return [
+      "*AJK Election 2026 Quetta*",
+      "حتمی انتخابی فہرست",
+      "",
+      `*نام:* ${voter.name.ur}`,
+      `*ولد:* ${voter.fatherName.ur}`,
+      `*CNIC:* ${voter.cnic}`,
+      `*عمر / پیشہ:* ${voter.age} · ${voter.occupation.ur}`,
+      `*علاقہ:* ${voter.areaName.ur} (${voter.areaNumber})`,
+      `*پتہ:* ${voter.address.ur}`,
+    ].join("\n");
+  }
 
-  return lines.join("\n");
+  return [
+    "*AJK Election 2026 Quetta*",
+    "Final Electoral Roll",
+    "",
+    `*Name:* ${voter.name.en}`,
+    `*Father:* ${voter.fatherName.en}`,
+    `*CNIC:* ${voter.cnic}`,
+    `*Age / Job:* ${voter.age} · ${voter.occupation.en}`,
+    `*Area:* ${voter.areaName.en} (${voter.areaNumber})`,
+    `*Address:* ${voter.address.en}`,
+  ].join("\n");
+}
+
+/** Full message with a single link at the end. */
+export function buildShareMessage(voter: VoterRecord, lang: Lang): string {
+  const isUr = lang === "ur";
+  const linkLabel = isUr ? "لنک" : "Link";
+  return `${buildShareBody(voter, lang)}\n\n${linkLabel}:\n${getShareUrl(voter)}`;
+}
+
+/** @deprecated use buildShareMessage */
+export function buildShareText(voter: VoterRecord, lang: Lang): string {
+  return buildShareMessage(voter, lang);
 }
 
 export function cnicFromSearchParams(value: string | null): string {
