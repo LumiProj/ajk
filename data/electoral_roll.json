@@ -3916,12 +3916,12 @@
       },
       "age": 80,
       "address": {
-        "ur": "گلی 1 محلہ نواں کلی زرغون آباد فیز 2، کوئٹہ",
-        "en": "Street 1, Mohalla Nawan Killi Zarghoon Abad Phase 2, Quetta"
+        "ur": "گلی / محلہ نواں کلی زرغون آباد فیز 1، کوئٹہ",
+        "en": "Street / Mohalla Nawan Killi Zarghoon Abad Phase 1, Quetta"
       },
       "previous_address": {
         "ur": "منڈی پونچھ",
-        "en": ""
+        "en": "Mandi Poonch"
       },
       "list_page": "3/4",
       "electoral_area": {
@@ -3948,7 +3948,7 @@
         }
       },
       "source_file": "Quetta (4520192).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 2,
@@ -4281,11 +4281,11 @@
       "age": 41,
       "address": {
         "ur": "محلہ نواں کلی زرغون آباد فیز 1، کوئٹہ",
-        "en": ""
+        "en": "Mohalla Nawan Killi Zarghoon Abad Phase 1, Quetta"
       },
       "previous_address": {
         "ur": "منڈی پونچھ",
-        "en": ""
+        "en": "Mandi Poonch"
       },
       "list_page": "3/4",
       "electoral_area": {
@@ -4312,7 +4312,7 @@
         }
       },
       "source_file": "Quetta (4520192).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 6,
@@ -4990,7 +4990,6 @@
       "source_file": "Quetta (4520218).pdf",
       "ocr_quality": "manual"
     },
-
     {
       "serial_number": 1,
       "gender": "female",
