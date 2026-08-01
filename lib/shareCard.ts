@@ -160,8 +160,9 @@ export async function renderShareCardPng(
   ctx.fill();
   ctx.restore();
 
-  // Header band
-  const headerH = 210;
+  // Header band — centered flag + titles
+  const headerH = 268;
+  const headerMidX = cardX + cardW / 2;
   roundRect(ctx, cardX, cardY, cardW, headerH + 40, 36);
   ctx.fillStyle = green;
   ctx.fill();
@@ -171,16 +172,16 @@ export async function renderShareCardPng(
   ctx.fillStyle = saffron;
   ctx.fillRect(cardX, cardY, cardW, 14);
 
-  // Flag
+  // Flag (centered above titles)
+  const fw = 78;
+  const fh = 78;
+  const fy = cardY + 36;
   try {
     const flag = await loadImage("/flag-ajk.png");
-    const fw = 92;
-    const fh = 92;
-    const fx = isUr ? cardX + cardW - 48 - fw : cardX + 48;
-    const fy = cardY + 48;
+    const fx = headerMidX - fw / 2;
     ctx.save();
-    roundRect(ctx, fx - 6, fy - 6, fw + 12, fh + 12, 18);
-    ctx.fillStyle = "rgba(255,255,255,0.12)";
+    roundRect(ctx, fx - 8, fy - 8, fw + 16, fh + 16, 18);
+    ctx.fillStyle = "rgba(255,255,255,0.14)";
     ctx.fill();
     ctx.drawImage(flag, fx, fy, fw, fh);
     ctx.restore();
@@ -190,38 +191,33 @@ export async function renderShareCardPng(
 
   ctx.fillStyle = "#ffffff";
   ctx.textBaseline = "alphabetic";
-  ctx.direction = isUr ? "rtl" : "ltr";
-  const headX = isUr ? cardX + cardW - 48 : cardX + 48;
-  const headAlign: CanvasTextAlign = isUr ? "right" : "left";
+  ctx.textAlign = "center";
 
+  ctx.direction = isUr ? "rtl" : "ltr";
   ctx.font = isUr
-    ? '500 30px "Noto Nastaliq Urdu", serif'
-    : "500 26px Outfit, sans-serif";
-  ctx.textAlign = headAlign;
+    ? '500 28px "Noto Nastaliq Urdu", serif'
+    : "500 24px Outfit, sans-serif";
   ctx.fillText(
     isUr ? "حتمی انتخابی فہرست ۲۰۲۶" : "Final Electoral Roll 2026",
-    headX,
-    cardY + 78,
+    headerMidX,
+    fy + fh + 42,
   );
 
-  const headerMidX = cardX + cardW / 2;
-  ctx.font = "700 40px Outfit, sans-serif";
+  ctx.font = "700 38px Outfit, sans-serif";
   ctx.direction = "ltr";
-  ctx.textAlign = "center";
-  ctx.fillText("AJK Election 2026 Quetta", headerMidX, cardY + 138);
+  ctx.fillText("AJK Election 2026 Quetta", headerMidX, fy + fh + 92);
 
   ctx.direction = isUr ? "rtl" : "ltr";
   ctx.font = isUr
-    ? '500 26px "Noto Nastaliq Urdu", serif'
-    : "500 22px Outfit, sans-serif";
+    ? '500 24px "Noto Nastaliq Urdu", serif'
+    : "500 20px Outfit, sans-serif";
   ctx.fillStyle = "rgba(255,255,255,0.86)";
-  ctx.textAlign = "center";
   ctx.fillText(
     isUr
       ? "آزاد جموں و کشمیر الیکشن کمیشن"
       : "Azad Jammu & Kashmir Election Commission",
     headerMidX,
-    cardY + 188,
+    fy + fh + 136,
   );
 
   // Body
@@ -295,23 +291,24 @@ export async function renderShareCardPng(
   y += 40;
 
   // CNIC block
-  roundRect(ctx, contentLeft, y, contentW, 118, 22);
+  roundRect(ctx, contentLeft, y, contentW, 130, 22);
   ctx.fillStyle = "rgba(0,54,15,0.05)";
   ctx.fill();
   ctx.fillStyle = greenMid;
+  ctx.textBaseline = "alphabetic";
   ctx.font = isUr
     ? '500 26px "Noto Nastaliq Urdu", serif'
     : "600 22px Outfit, sans-serif";
   ctx.direction = isUr ? "rtl" : "ltr";
   ctx.textAlign = "center";
-  ctx.fillText(isUr ? "شناختی کارڈ نمبر" : "CNIC", midX, y + 38);
+  ctx.fillText(isUr ? "شناختی کارڈ نمبر" : "CNIC", midX, y + 40);
   ctx.fillStyle = ink;
   ctx.font = "700 42px Outfit, sans-serif";
   ctx.direction = "ltr";
-  ctx.fillText(voter.cnic, midX, y + 88);
-  y += 146;
+  ctx.fillText(voter.cnic, midX, y + 98);
+  y += 158;
 
-  // Meta rows
+  // Meta rows — clear gap between label and value (Nastaliq needs room)
   const occupation = displayOccupation(voter.occupation, lang);
   const areaName = pick(voter.areaName, lang);
   const areaLine = areaName
@@ -326,6 +323,7 @@ export async function renderShareCardPng(
   ].filter((r) => r.value);
 
   for (const row of rows) {
+    ctx.textBaseline = "top";
     ctx.fillStyle = muted;
     ctx.font = isUr
       ? '500 24px "Noto Nastaliq Urdu", serif'
@@ -334,7 +332,7 @@ export async function renderShareCardPng(
     ctx.textAlign = isUr ? "right" : "left";
     const labelX = isUr ? contentRight : contentLeft;
     ctx.fillText(row.label, labelX, y);
-    y += 34;
+    y += isUr ? 48 : 32;
 
     ctx.fillStyle = ink;
     const valueUrdu = isArabicScript(row.value);
@@ -350,12 +348,13 @@ export async function renderShareCardPng(
       valueX,
       y,
       contentW,
-      valueUrdu ? 44 : 36,
+      valueUrdu ? 46 : 36,
       row.label.includes("Address") || row.label === "پتہ" ? 3 : 2,
       isUr ? "right" : "left",
     );
-    y += 28;
+    y += isUr ? 36 : 28;
   }
+  ctx.textBaseline = "alphabetic";
 
   // Footer
   const footerY = cardY + cardH - 70;
