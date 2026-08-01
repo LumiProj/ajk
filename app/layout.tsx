@@ -15,7 +15,7 @@ const nastaliq = Noto_Nastaliq_Urdu({
   display: "swap",
 });
 
-const siteUrl = "https://ajkelection2026quetta.com";
+const siteUrl = "https://www.ajkelection2026quetta.com";
 const title = "AJK Election 2026 Quetta";
 const description =
   "حتمی انتخابی فہرست ۲۰۲۶ — کوئٹہ۔ نام یا شناختی کارڈ نمبر سے تلاش کریں۔ Final electoral roll search for Quetta / AJK.";
