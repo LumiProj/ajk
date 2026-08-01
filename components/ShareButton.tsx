@@ -3,51 +3,50 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Lang, VoterRecord } from "@/lib/types";
-import { buildShareBody, buildShareMessage } from "@/lib/shareVoter";
+import { buildShareMessage } from "@/lib/shareVoter";
+import { shareOrDownloadCard } from "@/lib/shareCard";
+import { pick } from "@/lib/display";
 
 type Props = {
   voter: VoterRecord;
   lang: Lang;
 };
 
+type Status = "idle" | "copied" | "shared" | "downloaded" | "working" | "error";
+
 export function ShareButton({ voter, lang }: Props) {
   const isUr = lang === "ur";
-  const [status, setStatus] = useState<"idle" | "copied" | "shared">("idle");
+  const [status, setStatus] = useState<Status>("idle");
 
-  const body = buildShareBody(voter, lang);
   const message = buildShareMessage(voter, lang);
-  const title = isUr
-    ? `${voter.name.ur} — AJK Election 2026`
-    : `${voter.name.en || voter.name.ur} — AJK Election 2026`;
+  const title = `${pick(voter.name, lang)} — AJK Election 2026`;
 
-  async function shareNative() {
-    if (typeof navigator !== "undefined" && navigator.share) {
-      try {
-        // Text only — no URL/link in the share payload.
-        await navigator.share({ title, text: body });
-        setStatus("shared");
-        window.setTimeout(() => setStatus("idle"), 2000);
+  function flash(next: Status, ms = 2400) {
+    setStatus(next);
+    window.setTimeout(() => setStatus("idle"), ms);
+  }
+
+  async function shareCard() {
+    setStatus("working");
+    try {
+      const result = await shareOrDownloadCard(voter, lang, title);
+      flash(result === "shared" ? "shared" : "downloaded");
+    } catch (error) {
+      if ((error as Error).name === "AbortError") {
+        setStatus("idle");
         return;
-      } catch (error) {
-        if ((error as Error).name === "AbortError") return;
       }
+      flash("error");
     }
-    await copyText();
   }
 
   async function copyText() {
     try {
       await navigator.clipboard.writeText(message);
-      setStatus("copied");
-      window.setTimeout(() => setStatus("idle"), 2200);
+      flash("copied");
     } catch {
       window.prompt(isUr ? "کاپی کریں:" : "Copy:", message);
     }
-  }
-
-  function shareWhatsApp() {
-    const wa = `https://wa.me/?text=${encodeURIComponent(message)}`;
-    window.open(wa, "_blank", "noopener,noreferrer");
   }
 
   return (
@@ -58,8 +57,8 @@ export function ShareButton({ voter, lang }: Props) {
         </p>
         <p className="share-subtitle">
           {isUr
-            ? "مختصر اور صاف پیغام — واٹس ایپ کے لیے بہتر"
-            : "Short clean message — better for WhatsApp"}
+            ? "خوبصورت ووٹنگ کارڈ تصویر — واٹس ایپ کے لیے"
+            : "Elegant voting card image — perfect for WhatsApp"}
         </p>
       </div>
 
@@ -67,15 +66,17 @@ export function ShareButton({ voter, lang }: Props) {
         <button
           type="button"
           className="share-btn share-btn-primary"
-          onClick={shareNative}
+          onClick={shareCard}
+          disabled={status === "working"}
         >
           <ShareIcon />
-          <span>{isUr ? "شیئر کریں" : "Share"}</span>
+          <span>{isUr ? "شیئر کارڈ" : "Share card"}</span>
         </button>
         <button
           type="button"
           className="share-btn share-btn-wa"
-          onClick={shareWhatsApp}
+          onClick={shareCard}
+          disabled={status === "working"}
           aria-label="WhatsApp"
         >
           <WhatsAppIcon />
@@ -85,9 +86,10 @@ export function ShareButton({ voter, lang }: Props) {
           type="button"
           className="share-btn share-btn-ghost"
           onClick={copyText}
+          disabled={status === "working"}
         >
           <CopyIcon />
-          <span>{isUr ? "کاپی" : "Copy"}</span>
+          <span>{isUr ? "کاپی ٹیکسٹ" : "Copy text"}</span>
         </button>
       </div>
 
@@ -99,13 +101,25 @@ export function ShareButton({ voter, lang }: Props) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 4 }}
           >
-            {status === "copied"
+            {status === "working"
               ? isUr
-                ? "ریکارڈ کاپی ہو گیا"
-                : "Record copied"
-              : isUr
-                ? "شیئر ہو گیا"
-                : "Shared"}
+                ? "کارڈ تیار ہو رہا ہے…"
+                : "Preparing card…"
+              : status === "copied"
+                ? isUr
+                  ? "ٹیکسٹ کاپی ہو گیا"
+                  : "Text copied"
+                : status === "downloaded"
+                  ? isUr
+                    ? "کارڈ محفوظ ہو گیا — واٹس ایپ میں منسلک کریں"
+                    : "Card saved — attach it in WhatsApp"
+                  : status === "error"
+                    ? isUr
+                      ? "کارڈ نہیں بن سکا"
+                      : "Could not create card"
+                    : isUr
+                      ? "کارڈ شیئر ہو گیا"
+                      : "Card shared"}
           </motion.p>
         )}
       </AnimatePresence>
