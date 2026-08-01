@@ -50,7 +50,9 @@ export function SearchBox({ value, onChange, onSearch, lang }: Props) {
             inputMode={cnicMode && value.length > 0 ? "numeric" : "text"}
             autoComplete="off"
             placeholder={
-              isUr ? "ولید یوسف یا 5440005061863" : "Waleed Yousaf or 5440005061863"
+              isUr
+                ? "مثال: احمد علی یا 12345-1234567-1"
+                : "e.g. Ahmed Ali or 12345-1234567-1"
             }
             value={value}
             onChange={(e) => handleChange(e.target.value)}
