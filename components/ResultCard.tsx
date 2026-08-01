@@ -1,7 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
-import type { Lang, LocalizedString, VoterRecord } from "@/lib/types";
+import type { Lang, VoterRecord } from "@/lib/types";
+import {
+  detectRelation,
+  displayOccupation,
+  isArabicScript,
+  pick,
+  relationLabel,
+  relationPerson,
+} from "@/lib/display";
 import { ShareButton } from "./ShareButton";
 
 type Props = {
@@ -9,12 +17,6 @@ type Props = {
   lang: Lang;
   index: number;
 };
-
-function pick(value: LocalizedString, lang: Lang) {
-  const preferred = lang === "ur" ? value.ur : value.en;
-  const fallback = lang === "ur" ? value.en : value.ur;
-  return (preferred || fallback || "").trim();
-}
 
 function Row({
   label,
@@ -29,14 +31,17 @@ function Row({
 }) {
   if (!value) return null;
   const isUr = lang === "ur";
+  const valueClass = ltr
+    ? "ltr-value"
+    : isArabicScript(value)
+      ? "urdu-text"
+      : "en-text";
   return (
     <div className="detail-row">
       <div className="detail-label">
         <span className={isUr ? "urdu-text" : "en-text"}>{label}</span>
       </div>
-      <div
-        className={`detail-value ${ltr ? "ltr-value" : isUr ? "urdu-text" : "en-text"}`}
-      >
+      <div className={`detail-value ${valueClass}`}>
         {ltr ? <span dir="ltr">{value}</span> : value}
       </div>
     </div>
@@ -52,6 +57,11 @@ export function ResultCard({ voter, lang, index }: Props) {
     : voter.gender === "male"
       ? "Male"
       : "Female";
+
+  const relation = detectRelation(voter.fatherName, voter.gender);
+  const person = relationPerson(voter.fatherName, lang);
+  const name = pick(voter.name, lang);
+  const occupation = displayOccupation(voter.occupation, lang);
 
   return (
     <motion.article
@@ -70,14 +80,18 @@ export function ResultCard({ voter, lang, index }: Props) {
           <p className="result-serial en-text">
             <span dir="ltr">#{voter.serialNumber}</span>
           </p>
-          <h2 className={`result-name ${isUr ? "urdu-text" : "en-text"}`}>
-            {pick(voter.name, lang)}
+          <h2
+            className={`result-name ${isArabicScript(name) ? "urdu-text" : "en-text"}`}
+          >
+            {name}
           </h2>
-          <p className={`result-father ${isUr ? "urdu-text" : "en-text"}`}>
-            <span className="result-father-label">
-              {isUr ? "ولد" : "s/o"}
+          <p
+            className={`result-father ${isArabicScript(person) ? "urdu-text" : "en-text"}`}
+          >
+            <span className={`result-father-label ${isUr ? "urdu-text" : "en-text"}`}>
+              {relationLabel(relation, lang)}
             </span>{" "}
-            {pick(voter.fatherName, lang)}
+            {person}
           </p>
         </div>
         <div className="result-badges">
@@ -119,9 +133,9 @@ export function ResultCard({ voter, lang, index }: Props) {
                   </span>
                 </div>
                 <div
-                  className={`detail-value ${isUr ? "urdu-text" : "en-text"}`}
+                  className={`detail-value ${isArabicScript(occupation) ? "urdu-text" : isUr ? "urdu-text" : "en-text"}`}
                 >
-                  {pick(voter.occupation, lang)}
+                  {occupation}
                 </div>
               </div>
             </div>

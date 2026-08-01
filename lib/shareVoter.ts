@@ -1,11 +1,18 @@
 import type { Lang, VoterRecord } from "./types";
+import {
+  detectRelation,
+  displayOccupation,
+  pick,
+  relationLabel,
+  relationPerson,
+} from "./display";
 import { formatCnicInput, normalizeCnic } from "./search";
 
 export function getShareUrl(voter: VoterRecord): string {
   const origin =
     typeof window !== "undefined"
       ? window.location.origin
-      : "https://ajkelection2026quetta.com";
+      : "https://www.ajkelection2026quetta.com";
   const url = new URL(origin);
   url.searchParams.set("cnic", normalizeCnic(voter.cnic));
   return url.toString();
@@ -14,18 +21,25 @@ export function getShareUrl(voter: VoterRecord): string {
 /** Compact WhatsApp-friendly body (no URL — attach separately). */
 export function buildShareBody(voter: VoterRecord, lang: Lang): string {
   const isUr = lang === "ur";
+  const kind = detectRelation(voter.fatherName, voter.gender);
+  const rel = relationLabel(kind, lang);
+  const person = relationPerson(voter.fatherName, lang);
+  const name = pick(voter.name, lang);
+  const occupation = displayOccupation(voter.occupation, lang);
+  const area = pick(voter.areaName, lang);
+  const address = pick(voter.address, lang);
 
   if (isUr) {
     return [
       "*AJK Election 2026 Quetta*",
       "حتمی انتخابی فہرست",
       "",
-      `*نام:* ${voter.name.ur}`,
-      `*ولد:* ${voter.fatherName.ur}`,
+      `*نام:* ${name}`,
+      `*${rel}:* ${person}`,
       `*CNIC:* ${voter.cnic}`,
-      `*عمر / پیشہ:* ${voter.age} · ${voter.occupation.ur}`,
-      `*علاقہ:* ${voter.areaName.ur} (${voter.areaNumber})`,
-      `*پتہ:* ${voter.address.ur}`,
+      `*عمر / پیشہ:* ${voter.age} · ${occupation}`,
+      `*علاقہ:* ${area} (${voter.areaNumber})`,
+      `*پتہ:* ${address}`,
     ].join("\n");
   }
 
@@ -33,12 +47,12 @@ export function buildShareBody(voter: VoterRecord, lang: Lang): string {
     "*AJK Election 2026 Quetta*",
     "Final Electoral Roll",
     "",
-    `*Name:* ${voter.name.en}`,
-    `*Father:* ${voter.fatherName.en}`,
+    `*Name:* ${name}`,
+    `*${rel}:* ${person}`,
     `*CNIC:* ${voter.cnic}`,
-    `*Age / Job:* ${voter.age} · ${voter.occupation.en}`,
-    `*Area:* ${voter.areaName.en} (${voter.areaNumber})`,
-    `*Address:* ${voter.address.en}`,
+    `*Age / Job:* ${voter.age} · ${occupation}`,
+    `*Area:* ${area} (${voter.areaNumber})`,
+    `*Address:* ${address}`,
   ].join("\n");
 }
 
