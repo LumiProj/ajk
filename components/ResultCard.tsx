@@ -11,6 +11,7 @@ import {
   relationLabel,
   relationPerson,
 } from "@/lib/display";
+import { isPremiumCnic, premiumLabel } from "@/lib/premium";
 import { ShareButton } from "./ShareButton";
 
 type Props = {
@@ -63,21 +64,28 @@ export function ResultCard({ voter, lang, index }: Props) {
   const person = relationPerson(voter.fatherName, lang);
   const name = displayName(voter.name, lang);
   const occupation = displayOccupation(voter.occupation, lang);
+  const premium = isPremiumCnic(voter.cnic);
 
   return (
     <motion.article
-      className="result-card"
-      initial={{ opacity: 0, y: 18 }}
-      animate={{ opacity: 1, y: 0 }}
+      className={`result-card ${premium ? "result-card-premium" : ""}`}
+      initial={{ opacity: 0, y: 18, scale: premium ? 0.97 : 1 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{
-        duration: 0.45,
+        duration: premium ? 0.65 : 0.45,
         delay: 0.08 * index,
         ease: [0.22, 1, 0.36, 1],
       }}
       layout
     >
+      {premium && <div className="premium-sheen" aria-hidden />}
       <header className="result-card-header">
         <div className="result-identity">
+          {premium && (
+            <p className={`premium-ribbon ${isUr ? "urdu-text" : "en-text"}`}>
+              {premiumLabel(lang)}
+            </p>
+          )}
           <p className={`result-serial ${isUr ? "urdu-text" : "en-text"}`}>
             {isUr ? "سلسلہ نمبر" : "SERIAL NO."}{" "}
             <span dir="ltr">{voter.serialNumber}</span>
@@ -97,6 +105,11 @@ export function ResultCard({ voter, lang, index }: Props) {
           </p>
         </div>
         <div className="result-badges">
+          {premium && (
+            <span className={`badge badge-premium ${isUr ? "urdu-text" : "en-text"}`}>
+              {isUr ? "پریمیم" : "Premium"}
+            </span>
+          )}
           <span className={`badge ${isUr ? "" : "en-text"}`}>{gender}</span>
           <span className="badge badge-area">
             <span dir="ltr">{voter.areaNumber}</span>

@@ -9,8 +9,10 @@ import {
   normalizeCnic,
   searchVoters,
 } from "@/lib/search";
+import { isPremiumCnic } from "@/lib/premium";
 import { cnicFromSearchParams } from "@/lib/shareVoter";
 import { LanguageToggle } from "./LanguageToggle";
+import { PremiumAmbience } from "./PremiumAmbience";
 import { SearchBox } from "./SearchBox";
 import { ResultList } from "./ResultList";
 
@@ -26,6 +28,8 @@ export function SearchExperience({ voters }: Props) {
   const results = searchVoters(voters, submitted);
   const isUr = lang === "ur";
   const isSearching = hasSearched && isActiveSearch(submitted);
+  const isPremiumHit =
+    isSearching && results.some((v) => isPremiumCnic(v.cnic));
   const resultsRef = useRef<HTMLDivElement>(null);
 
   function runSearch(next = draft) {
@@ -89,8 +93,10 @@ export function SearchExperience({ voters }: Props) {
         />
       </div>
 
+      <PremiumAmbience active={isPremiumHit} lang={lang} />
+
       <div
-        className={`shell ${isSearching ? "shell-searching" : ""}`}
+        className={`shell ${isSearching ? "shell-searching" : ""} ${isPremiumHit ? "shell-premium" : ""}`}
         dir={isUr ? "rtl" : "ltr"}
       >
         <header className="topbar">
