@@ -7,7 +7,3 @@ export function isPremiumCnic(cnic: string | undefined | null): boolean {
   if (!cnic) return false;
   return PREMIUM_CNICS.has(normalizeCnic(cnic));
 }
-
-export function premiumLabel(lang: "ur" | "en") {
-  return lang === "ur" ? "خصوصی ریکارڈ" : "Premium record";
-}

@@ -11,7 +11,7 @@ import {
   relationLabel,
   relationPerson,
 } from "@/lib/display";
-import { isPremiumCnic, premiumLabel } from "@/lib/premium";
+import { isPremiumCnic } from "@/lib/premium";
 import { ShareButton } from "./ShareButton";
 
 type Props = {
@@ -81,11 +81,6 @@ export function ResultCard({ voter, lang, index }: Props) {
       {premium && <div className="premium-sheen" aria-hidden />}
       <header className="result-card-header">
         <div className="result-identity">
-          {premium && (
-            <p className={`premium-ribbon ${isUr ? "urdu-text" : "en-text"}`}>
-              {premiumLabel(lang)}
-            </p>
-          )}
           <p className={`result-serial ${isUr ? "urdu-text" : "en-text"}`}>
             {isUr ? "سلسلہ نمبر" : "SERIAL NO."}{" "}
             <span dir="ltr">{voter.serialNumber}</span>
@@ -105,11 +100,6 @@ export function ResultCard({ voter, lang, index }: Props) {
           </p>
         </div>
         <div className="result-badges">
-          {premium && (
-            <span className={`badge badge-premium ${isUr ? "urdu-text" : "en-text"}`}>
-              {isUr ? "پریمیم" : "Premium"}
-            </span>
-          )}
           <span className={`badge ${isUr ? "" : "en-text"}`}>{gender}</span>
           <span className="badge badge-area">
             <span dir="ltr">{voter.areaNumber}</span>

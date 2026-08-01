@@ -690,30 +690,6 @@ body::before {
   }
 }
 
-.premium-ribbon {
-  display: inline-flex;
-  margin: 0 0 0.55rem;
-  padding: 0.28rem 0.8rem;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #c98500, var(--flag-saffron));
-  color: #fff;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  box-shadow: 0 6px 16px rgba(204, 125, 3, 0.28);
-}
-
-.badge-premium {
-  background: linear-gradient(90deg, #c98500, var(--flag-saffron));
-  color: #fff;
-  font-family: var(--font-en);
-  font-weight: 700;
-}
-
-.badge-premium.urdu-text {
-  font-family: var(--font-urdu);
-}
-
 body.premium-mode {
   background:
     radial-gradient(980px 480px at 80% -8%, rgba(234, 148, 0, 0.28), transparent 55%),
@@ -723,42 +699,6 @@ body.premium-mode {
 
 .shell-premium .brand {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
-}
-
-.premium-music-btn {
-  position: fixed;
-  z-index: 40;
-  inset-inline-end: 1rem;
-  bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.65rem 0.95rem;
-  border: 1px solid rgba(234, 148, 0, 0.45);
-  border-radius: 999px;
-  background: rgba(255, 252, 245, 0.92);
-  color: #8a5a00;
-  font-size: 0.86rem;
-  font-weight: 650;
-  box-shadow: 0 10px 28px rgba(0, 54, 15, 0.14);
-  backdrop-filter: blur(8px);
-  cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.premium-music-btn:hover {
-  transform: translateY(-1px);
-  background: #fff8ea;
-}
-
-.premium-music-icon {
-  display: inline-grid;
-  place-items: center;
-  width: 1.35rem;
-  height: 1.35rem;
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--flag-saffron) 22%, transparent);
-  font-size: 0.78rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

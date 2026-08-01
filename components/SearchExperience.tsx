@@ -12,7 +12,6 @@ import {
 import { isPremiumCnic } from "@/lib/premium";
 import { cnicFromSearchParams } from "@/lib/shareVoter";
 import { LanguageToggle } from "./LanguageToggle";
-import { PremiumAmbience } from "./PremiumAmbience";
 import { SearchBox } from "./SearchBox";
 import { ResultList } from "./ResultList";
 
@@ -79,6 +78,11 @@ export function SearchExperience({ voters }: Props) {
     return () => window.cancelAnimationFrame(frame);
   }, [hasSearched, submitted, results.length]);
 
+  useEffect(() => {
+    document.body.classList.toggle("premium-mode", isPremiumHit);
+    return () => document.body.classList.remove("premium-mode");
+  }, [isPremiumHit]);
+
   return (
     <>
       <div className="election-ribbon" aria-hidden />
@@ -92,8 +96,6 @@ export function SearchExperience({ voters }: Props) {
           priority={false}
         />
       </div>
-
-      <PremiumAmbience active={isPremiumHit} lang={lang} />
 
       <div
         className={`shell ${isSearching ? "shell-searching" : ""} ${isPremiumHit ? "shell-premium" : ""}`}
