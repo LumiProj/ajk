@@ -4214,8 +4214,8 @@
       "serial_number": 5,
       "gender": "male",
       "name": {
-        "ur": "شمامہ",
-        "en": "Shamama"
+        "ur": "ثمامہ",
+        "en": "Samama"
       },
       "father_name": {
         "ur": "غلام مصطفیٰ",
@@ -4260,7 +4260,7 @@
         }
       },
       "source_file": "Quetta (4520192).pdf",
-      "ocr_quality": "vision"
+      "ocr_quality": "manual"
     },
     {
       "serial_number": 5,
